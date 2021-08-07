@@ -1,0 +1,38 @@
+﻿@model IEnumerable<iMeeting.DAL.VenueModel>
+
+@{
+    ViewBag.Title = "_EditVenue";
+}
+
+<h2>_EditVenue</h2>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Limit)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "GetById", new { id = item.ID }) |
+            <a href="@Url.Action("Delete","Venue", new { id = item.ID })" onclick="return confirm('Are you sure you to delete this Record?');"><img src="https://img.icons8.com/ios-filled/24/000000/delete-forever.png" /></a>
+
+        </td>
+    </tr>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

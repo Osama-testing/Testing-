@@ -1,0 +1,135 @@
+﻿@model IEnumerable<iMeeting.DAL.VenueModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Add New Room
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Room</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("Add", "Venue", FormMethod.Post))
+                {
+
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label" style="font-weight:bold">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Name" placeholder="Enter Room Name" required>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label" style="font-weight:bold">Location</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Location" placeholder="Enter Location" required>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label" style="font-weight:bold">Limit</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="0" class="form-control" name="Limit" placeholder="Number of Participants Here" required>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div style="float:right">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<html>
+<head>
+
+</head>
+<body>
+    <br>
+    <br>
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Room</th>
+                <th>Location</th>
+                <th>Limit</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Limit)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "GetById", new { id = item.ID }) |
+                        <a href="@Url.Action("Delete","Venue", new { id = item.ID })" onclick="return confirm('Are you sure you to delete this Record?');"><img src="https://img.icons8.com/ios-filled/24/000000/delete-forever.png" /></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+</html>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModals">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("GetById", "Venue", FormMethod.Get))
+                {
+                }
+            </div>
+           
+        </div>
+    </div>
+</div>
