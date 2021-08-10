@@ -1,9 +1,7 @@
 using iMeeting.BAL;
-using System.Web.Mvc;
-using Testing_iMeeting.Controllers;
+using System.Web.Http;
 using Unity;
-using Unity.Injection;
-using Unity.Mvc5;
+using Unity.WebApi;
 
 namespace Testing_iMeeting
 {
@@ -18,10 +16,7 @@ namespace Testing_iMeeting
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IVenueRepository, VenueRepository>();
-            container.RegisterType<AccountController>(new InjectionConstructor());
-
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
 }

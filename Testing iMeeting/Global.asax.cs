@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Http;
+using Testing_iMeeting.Controllers;
 
 namespace Testing_iMeeting
 {
@@ -12,13 +14,15 @@ namespace Testing_iMeeting
     {
         protected void Application_Start()
         {
+
+            GlobalConfiguration.Configure(WebApiConfig.Register); // <--- this MUST be first 
+            UnityConfig.RegisterComponents();                           // <----- Add this line
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-           
-            UnityConfig.RegisterComponents();
         }
     }
 }

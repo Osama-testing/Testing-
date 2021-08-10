@@ -11,6 +11,9 @@ namespace Testing_iMeeting.Controllers
     public class VenueController : Controller
     {
         readonly IVenueRepository _VenueRepository;
+        public VenueController()
+        {
+        }
         public VenueController(IVenueRepository repository)
         {
             this._VenueRepository = repository;
@@ -19,8 +22,8 @@ namespace Testing_iMeeting.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var a = _VenueRepository.GetVenue();
-            return View(a);
+            //var a = _VenueRepository.GetVenue();
+            return View();
         }
         [HttpPost]
         public ActionResult Add(string Name, string Location, int Limit)
@@ -41,7 +44,7 @@ namespace Testing_iMeeting.Controllers
         }
         public ActionResult Delete(int id)
         {
-            if (id != null)
+            if (id != 0)
             {
                 _VenueRepository.DeleteVenue(id);
             }
@@ -49,7 +52,7 @@ namespace Testing_iMeeting.Controllers
         }
         public ActionResult GetById(int id)
         {
-           if (id != null)
+           if (id != 0)
             {
                VenueModel venue= _VenueRepository.GetById(id);
                 return View(venue);

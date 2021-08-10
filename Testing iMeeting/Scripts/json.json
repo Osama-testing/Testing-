@@ -1,0 +1,288 @@
+[
+  {
+    "name": "Tiger Nixon",
+    "Designation": "System Architect",
+    "Email": "asammad48@gmail.com",
+    "Department": "CS"
+  },
+
+  {
+    "name": "David Nixon",
+    "Designation": "Network Architect",
+    "Email": "tehsenn@gmail.com",
+    "Department": "Network"
+  },
+
+  {
+    "name": "Puru Cad",
+    "Designation": "Developer",
+    "Email": "puru@dev.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Tiger Dev",
+    "Designation": "HR",
+    "Email": "tigerdev@dev.pk",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Jamal Ahemd",
+    "Designation": "Network Architect",
+    "Email": "jamal@gmail.com",
+    "Department": "Network"
+  },
+
+  {
+    "name": "John Doe",
+    "Designation": "System Architect",
+    "Email": "john@hotmail.com",
+    "Department": "CS"
+  },
+
+  {
+    "name": "Tom Benton",
+    "Designation": "Design Architect",
+    "Email": "tomben@gmail.com",
+    "Department": "Design"
+  },
+
+  {
+    "name": "Nouman Nawaz",
+    "Designation": "Team Lead",
+    "Email": "nouman@team.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Hafeez Habib",
+    "Designation": "Team Lead",
+    "Email": "hafeez@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Ahmed Jamal",
+    "Designation": "CEO",
+    "Email": "ahmed@gmail.com",
+    "Department": "HR"
+  },
+
+  {
+    "name": "Touqeer Ansari",
+    "Designation": "Manager",
+    "Email": "tauqeer@gmail.com",
+    "Department": "Designing"
+  },
+
+  {
+    "name": "Ahmed Jamshed",
+    "Designation": "Manager",
+    "Email": "ahmed@gmail.com",
+    "Department": "Mobile App Dev"
+  },
+
+  {
+    "name": "Husnain Abbas",
+    "Designation": "Team Lead",
+    "Email": "husnainabbas@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Abbas Siddique",
+    "Designation": "HR",
+    "Email": "abbassidique@gmail.com",
+    "Department": "HR"
+  },
+
+  {
+    "name": "Ali Abid",
+    "Designation": "Network Engineer",
+    "Email": "aliabid@gmail.com",
+    "Department": "Network & Admin"
+  },
+
+  {
+    "name": "Amjad Ali Khan",
+    "Designation": "Manager",
+    "Email": "amjadali@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Mohib",
+    "Designation": "Designer",
+    "Email": "mohib@gmail.com",
+    "Department": "Designing"
+  },
+
+  {
+    "name": "Wamiq Khan",
+    "Designation": "Administrator",
+    "Email": "wamiqkhan@gmail.com",
+    "Department": "Admin"
+  },
+
+  {
+    "name": "Raja Manzoor",
+    "Designation": "Administrator",
+    "Email": "rajamanzoor@gmail.com",
+    "Department": "Admin"
+  },
+
+  {
+    "name": "Khizer Siddique",
+    "Designation": "HR",
+    "Email": "khizersiddique@gmail.com",
+    "Department": "HR"
+  },
+
+  {
+    "name": "Jawad Ahmed",
+    "Designation": "Network Analyst",
+    "Email": "jawadahmed@gmail.com",
+    "Department": "HR"
+  },
+
+  {
+    "name": "Asghar ALi",
+    "Designation": "Senior Manager",
+    "Email": "asgharali@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Tahir Nazir",
+    "Designation": "Finance Head",
+    "Email": "tahirnazir@gmail.com",
+    "Department": "Finance"
+  },
+
+  {
+    "name": "Waleed Bin Salah",
+    "Designation": "Finance Admin",
+    "Email": "waleed@gmail.com",
+    "Department": "Finance"
+  },
+
+  {
+    "name": "Sami Ud Din",
+    "Designation": "Project Manager",
+    "Email": "samiansari@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Ali Abbas",
+    "Designation": "Project Head",
+    "Email": "aliabbas@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Umer Bin Mazhar",
+    "Designation": "Team Lead",
+    "Email": "umar@gmail.com",
+    "Department": "HR"
+  },
+
+  {
+    "name": "Umera Ahmed",
+    "Designation": "Team Lead",
+    "Email": "umeraahmed@gmail.com",
+    "Department": "Sales and Support"
+  },
+
+  {
+    "name": "Humaira Arshad",
+    "Designation": "Manager",
+    "Email": "humaira@gmail.com",
+    "Department": "Sales nad Support"
+  },
+
+  {
+    "name": "Wahaj Ahmed",
+    "Designation": "Intern",
+    "Email": "wahajahmed@gmail.com",
+    "Department": "Sales and Support"
+  },
+
+  {
+    "name": "Maria Aftab",
+    "Designation": "CSR",
+    "Email": "maria@gmail.com",
+    "Department": "Business"
+  },
+
+  {
+    "name": "Saima",
+    "Designation": "CSR",
+    "Email": "sami@gmail.com",
+    "Department": "Business"
+  },
+
+  {
+    "name": "Anab Batool",
+    "Designation": "Team Lead",
+    "Email": "anabbatool@gmail.com",
+    "Department": "Business"
+  },
+
+  {
+    "name": "Zainab Malik",
+    "Designation": "Manager",
+    "Email": "zainabmalik@gmail.com",
+    "Department": "Business"
+  },
+
+  {
+    "name": "Faheem Akbar",
+    "Designation": "Manager",
+    "Email": "faheem@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Usman Shehzad",
+    "Designation": "Manager",
+    "Email": "usmanshehzad@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Uzair Jamal",
+    "Designation": "Senior Manager",
+    "Email": "uzairjamal@gmail.com",
+    "Department": "App Dev"
+  },
+
+  {
+    "name": "Ali Hamza",
+    "Designation": "Hardware Engineer",
+    "Email": "alihamza@gmail.com",
+    "Department": "IT"
+  },
+
+  {
+    "name": "Hamza Malik",
+    "Designation": "Team Lead",
+    "Email": "hamzamalik@gmail.com",
+    "Department": "IT"
+  },
+
+  {
+    "name": "Khushab Malik",
+    "Designation": "Manager",
+    "Email": "khushabmalik@gmail.com",
+    "Department": "IT"
+  },
+
+  {
+    "name": "Nouman Ejaz",
+    "Designation": "Intern",
+    "Email": "noumanejaz@gmail.com",
+    "Department": "IT"
+  }
+]

@@ -18,7 +18,6 @@ namespace iMeeting.BAL
 
         public IEnumerable<VenueModel> GetVenue()
         {
-            int a = 1;
             return _context.Venue.ToList();
         }
 
@@ -28,16 +27,22 @@ namespace iMeeting.BAL
             _context.SaveChanges();
         }
 
-        public void DeleteVenue(int Id)
+        public void DeleteVenue(int? Id)
         {
             VenueModel Venue = _context.Venue.Find(Id);
             _context.Venue.Remove(Venue);
             _context.SaveChanges();
         }
         
-        public VenueModel GetById(int id)
+        public VenueModel GetById(int? id)
         {
             return _context.Venue.FirstOrDefault(x => x.ID == id);
+        }
+
+        public void UpdateVenue(VenueModel Venue)
+        {
+            _context.Entry(Venue).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
