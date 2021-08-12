@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing iMeeting", "Testing iMeeting\Testing iMeeting.csproj", "{BDABDEC8-24B3-494F-A7BF-66DB71CDC0BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMeeting.WebUi", "Testing iMeeting\iMeeting.WebUi.csproj", "{BDABDEC8-24B3-494F-A7BF-66DB71CDC0BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMeeting.DAL", "iMeeting.DAL\iMeeting.DAL.csproj", "{E6F05C4F-76C4-49C1-B364-878620D5E01B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMeeting.BLL", "iMeeting.DAL\iMeeting.BLL.csproj", "{E6F05C4F-76C4-49C1-B364-878620D5E01B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMeeting.BAL", "iMeeting.BAL\iMeeting.BAL.csproj", "{159F7012-78A9-47E0-B086-5B862CE51FA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMeeting.DAL", "iMeeting.BAL\iMeeting.DAL.csproj", "{159F7012-78A9-47E0-B086-5B862CE51FA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

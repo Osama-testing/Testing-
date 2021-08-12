@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Userpanel";
+}
+
+<br>
+<br>
+<div>
+    <b>Show:</b> &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="Today" onclick="LoadMeetingsData(this.value)">Today</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="Tomorrow" onclick="LoadMeetingsData(this.value)">Tomorrow</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="ThisWeek" onclick="LoadMeetingsData(this.value)">This Week</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="ThisMonth" onclick="LoadMeetingsData(this.value)">This Month</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="All" onclick="LoadMeetingsData(this.value)">Show All</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text"class="btn btn-outline-success"  id="datepicker" onchange="GetDateTime()">
+    <button id="btn" class="btn btn-outline-success" style="float:right">Download Meeting List</button>
+</div>
+<hr />
+<table id="table" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Venue</th>
+            <th>Date/Time</th>
+            <th>Duration</th>
+            <th>Participants</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="tbody"></tbody>
+</table>
+
+
+<script>
+
+    $(function () {
+        $("#datepicker").datepicker();
+       
+    });
+    $(document).ready(function () {
+        $("#btn").click(function () {
+            $("#table").table2excel({
+                // exclude CSS class
+                // exclude: ".noExl",
+                name: "Worksheet Name",
+                filename: "Meeting List", //do not include extension
+                fileext: ".xls" // file extension
+            });
+        });
+        LoadMeetingsData();
+    });
+    function GetDateTime()
+    {
+        debugger
+
+        var jsDate = $('#datepicker').val();
+         LoadMeetingsByDate(jsDate);
+        
+    }
+
+    function LoadMeetingsData(val) {
+        debugger
+        $.ajax({
+
+            url: "http://localhost:52092/api/UserPanelApi/Filters?Filter=" + val,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.Title + '</td>';
+                    html += '<td>' + item.Status + '</td>';
+                    html += '<td>' + item.Location + '</td>';
+                    html += '<td>' + item.DateTime + '</td>';
+                    html += '<td>' + item.Duration + '    Minutes' + '</td>';
+                    html += '<td>' + item.Participants + '</td>';
+                    html += '<td>' + '<button type="button" class="btn btn-success btn-sm">Accept</button> <button type="button" class="btn btn-danger btn-sm">Decline</button>' + '</td>';
+                    html += '</tr>';
+                    console.log(item.id)
+                });
+                $('.tbody').html(html);
+                $('#table').DataTable();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+
+        }
+    function LoadMeetingsByDate(val) {
+        console.log(val);
+        let Url = 'http://localhost:52092/api/UserPanelApi/FilterByDate?Filter=' + val
+       // let Url = 'http://localhost:52092/api/UserPanelApi/FilterByDatetest?Filter=Wed Aug 11 2021 00:00:00 GMT+0500 (Pakistan Standard Time)';
+       // console.log(Url);
+        $.ajax({
+
+            url: Url,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.Title + '</td>';
+                    html += '<td>' + item.Status + '</td>';
+                    html += '<td>' + item.Location + '</td>';
+                    html += '<td>' + item.DateTime + '</td>';
+                    html += '<td>' + item.Duration + '    Minutes' + '</td>';
+                    html += '<td>' + item.Participants + '</td>';
+                    html += '<td>' + '<button type="button" class="btn btn-success btn-sm">Accept</button> <button type="button" class="btn btn-danger btn-sm">Decline</button>' + '</td>';
+                    html += '</tr>';
+                    console.log(item.id)
+                });
+                $('.tbody').html(html);
+                $('#table').DataTable();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+
+    }
+</script>
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

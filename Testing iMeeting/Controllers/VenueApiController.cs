@@ -54,18 +54,8 @@ namespace Testing_iMeeting.Controllers
             _VenueRepository.UpdateVenue(venue);
             return Ok(1);
         }
-        [HttpGet]
-        public IHttpActionResult test()
-        {
-            List<string> UserList = new List<string>();
-            UserList.Add("Mahesh Chand");
-            UserList.Add("Praveen Kumar");
-            UserList.Add("Raj Kumar");
-            string sJSONResponse = JsonConvert.SerializeObject(UserList);
-
-            return Ok(sJSONResponse);
-        }
-
+   
+    
 
 
     }

@@ -118,6 +118,7 @@
     <Compile Include="AccountViewModels.cs" />
     <Compile Include="Db_Context.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="MeetingModel.cs" />
     <Compile Include="Migrations\202108070644042_Initial.cs" />
     <Compile Include="Migrations\202108070644042_Initial.designer.cs">
       <DependentUpon>202108070644042_Initial.cs</DependentUpon>
@@ -133,6 +134,18 @@
     <Compile Include="Migrations\202108071147176_Delete Row.cs" />
     <Compile Include="Migrations\202108071147176_Delete Row.designer.cs">
       <DependentUpon>202108071147176_Delete Row.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108100551082_createtable.cs" />
+    <Compile Include="Migrations\202108100551082_createtable.designer.cs">
+      <DependentUpon>202108100551082_createtable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108101018192_changedatatype.cs" />
+    <Compile Include="Migrations\202108101018192_changedatatype.designer.cs">
+      <DependentUpon>202108101018192_changedatatype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108101034582_changedatatype1.cs" />
+    <Compile Include="Migrations\202108101034582_changedatatype1.designer.cs">
+      <DependentUpon>202108101034582_changedatatype1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="VenueModel.cs" />
@@ -155,6 +168,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108071147176_Delete Row.resx">
       <DependentUpon>202108071147176_Delete Row.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108100551082_createtable.resx">
+      <DependentUpon>202108100551082_createtable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108101018192_changedatatype.resx">
+      <DependentUpon>202108101018192_changedatatype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108101034582_changedatatype1.resx">
+      <DependentUpon>202108101034582_changedatatype1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

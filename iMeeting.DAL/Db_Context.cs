@@ -14,6 +14,7 @@ namespace iMeeting.DAL
             : base("DefaultConnection") { }
 
         public DbSet<VenueModel> Venue { get; set; }
+        public DbSet<MeetingModel> Meeting { get; set; }
 
     }
 }

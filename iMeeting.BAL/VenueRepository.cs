@@ -30,7 +30,8 @@ namespace iMeeting.BAL
         public void DeleteVenue(int? Id)
         {
             VenueModel Venue = _context.Venue.Find(Id);
-            _context.Venue.Remove(Venue);
+             _context.Venue.Remove(Venue);
+             _context.Venue.Remove(Venue);
             _context.SaveChanges();
         }
         
