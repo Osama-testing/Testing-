@@ -1,0 +1,175 @@
+﻿@model IEnumerable<iMeeting.DAL.MeetingModel>
+
+@{
+    ViewBag.Title = "Meeting";
+}
+@* Admin View *@
+
+<!-- Button trigger modal -->
+<br />
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float:right">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Add New
+</button>
+<h4>Meetings</h4>
+<hr />
+
+<br />
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <b>Show:</b> &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="Today" onclick=" LoadMeetingsData(this.value)">Today</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="Tomorrow" onclick="LoadMeetingsData(this.value)">Tomorrow</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="ThisWeek" onclick="LoadMeetingsData(this.value)">This Week</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="ThisMonth" onclick="LoadMeetingsData(this.value)">This Month</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-outline-success" value="All" onclick="LoadMeetingsData(this.value)">Show All</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" class="btn btn-outline-success" id="datepicker" onchange="GetDateTime()" placeholder="Filter By Date">
+    <button type="button" class="btn btn-outline-primary" style="float:right" id="hide">Grid</button>
+    <button type="button" class="btn btn-outline-primary" style="float:right">Calender</button>
+    <button type="button" class="btn btn-outline-primary" style="float:right" onclick="LoadMeetingsData()" id="show">List</button>
+
+
+
+</div>
+<hr />
+
+<table id="table" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Venue</th>
+            <th>Date/Time</th>
+            <th>Participants</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="tbody"></tbody>
+</table>
+
+<div id="ShowGrid">
+
+  
+
+</div>
+<script>
+    $(document).ready(function () {
+        $("#hide").click(function () {
+            $("#table").hide();
+        });
+        $("#show").click(function () {
+            $("#table").show();
+            $("#ShowGrid").show();
+        });
+        $("#datepicker").datepicker();
+        $("#ShowGrid").hide();
+
+        LoadMeetingsData();
+
+    });
+    function GetDateTime() {
+        var jsDate = $('#datepicker').val();
+        LoadMeetingsByDate(jsDate);
+    }
+    function LoadMeetingsData(val) {
+        $.ajax({
+
+            url: "http://localhost:52092/api/AdminMeetingApi/MeetingListByAdmin?Filter=" + val,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.Title + '</td>';
+                    html += '<td>' + item.Status + '</td>';
+                    html += '<td>' + item.Location + '</td>';
+                    html += '<td>' + item.DateTime + '</td>';
+                    html += '<td>' + item.Participants + '</td>';
+                    html += '<td>' + + '</td>';
+                    html += '</tr>';
+                    console.log(key)
+                });
+                $('.tbody').html(html);
+                $('#table').DataTable();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+
+    }
+    function LoadMeetingsByDate(val) {
+        console.log(val);
+        let Url = 'http://localhost:52092/api/AdminMeetingApi/MeetingFilter?Filter=' + val
+        // console.log(Url);
+        $.ajax({
+
+            url: Url,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.Title + '</td>';
+                    html += '<td>' + item.Status + '</td>';
+                    html += '<td>' + item.Location + '</td>';
+                    html += '<td>' + item.DateTime + '</td>';
+                    html += '<td>' + item.Participants + '</td>';
+                    html += '<td>' + + '</td>';
+                    html += '</tr>';
+                    console.log(item.id)
+                });
+                $('.tbody').html(html);
+                $('#table').DataTable();
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+
+    }
+
+</script>
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        $(document).ready(function () {
+
+            $("#show").click(function () {
+                $("p").show();
+            });
+        });
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

@@ -90,6 +90,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMeetingRepository.cs" />
+    <Compile Include="IAdminMeetingRepository.cs" />
     <Compile Include="IVenueRepository.cs" />
     <Compile Include="IUserpanelRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

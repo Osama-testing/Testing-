@@ -1,15 +1,9 @@
 ﻿@model IEnumerable<iMeeting.DAL.VenueModel>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.RoomName)
@@ -19,9 +13,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Limit)
-        </th>
-        <th>
-          
         </th>
         <th></th>
     </tr>
@@ -38,9 +29,6 @@
             @Html.DisplayFor(modelItem => item.Limit)
         </td>
         <td>
-           
-        </td>
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
@@ -48,4 +36,4 @@
     </tr>
 }
 
-</table>
+</table>*@

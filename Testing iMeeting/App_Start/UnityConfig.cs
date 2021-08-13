@@ -17,6 +17,7 @@ namespace Testing_iMeeting
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IVenueRepository, VenueRepository>();
             container.RegisterType<IUserpanelRespository, UserpanelRepository>();
+            container.RegisterType<IAdminMeetingRepository, AdminMeetingRepository>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

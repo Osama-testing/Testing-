@@ -37,28 +37,25 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            
+
                     @{
                         if (User.Identity.IsAuthenticated)
                         {
                             if (User.IsInRole("Admin"))
                             {
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Admin Links </a>
-                                </li>
-
+                                <li>@Html.ActionLink("Meetings", "Meeting", "iMeeting", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })</li>
+                                <li>@Html.ActionLink("Venue Management", "Venue", "iMeeting", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })</li>
                                 <li class="nav-item">
                                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                                 </li>
-                                <li>@Html.ActionLink("Venue Management", "Index", "Venue", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })</li>
 
                             }
                             else
                             {
 
-                                
-                                <li>@Html.ActionLink("AMS", "Userpanel", "Home", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })</li>
+
+                                <li>@Html.ActionLink("AMS", "MeetingList", "iMeeting", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link active" })</li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">User Links </a>

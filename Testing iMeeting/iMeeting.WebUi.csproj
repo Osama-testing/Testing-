@@ -225,11 +225,13 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminMeetingApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\iMeetingController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserPanelApiController.cs" />
     <Compile Include="Controllers\VenueApiController.cs" />
-    <Compile Include="Controllers\VenueController.cs" />
+    <Compile Include="Controllers\VenueContoller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,15 +315,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Views\Venue\Index.cshtml" />
     <Content Include="Views\VenueModels\Create.cshtml" />
     <Content Include="Views\VenueModels\Delete.cshtml" />
     <Content Include="Views\VenueModels\Details.cshtml" />
     <Content Include="Views\VenueModels\Edit.cshtml" />
     <Content Include="Views\VenueModels\Index.cshtml" />
-    <Content Include="Views\Shared\_EditVenue.cshtml" />
     <Content Include="Scripts\json.json" />
-    <Content Include="Views\Home\Userpanel.cshtml" />
+    <Content Include="Views\iMeeting\Venue.cshtml" />
+    <Content Include="Views\iMeeting\Meeting.cshtml" />
+    <Content Include="Views\iMeeting\MeetingList.cshtml" />
+    <Content Include="Views\iMeeting\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\iMeeting.BAL\iMeeting.DAL.csproj">

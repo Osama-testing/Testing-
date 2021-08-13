@@ -27,7 +27,7 @@ namespace iMeeting.BAL
             return _context.Meeting.Where(x=> x.IsActive==1).ToList();
         }
 
-
+        
         public IEnumerable<MeetingModel> FliterMeeting(String Filter)
         {
 

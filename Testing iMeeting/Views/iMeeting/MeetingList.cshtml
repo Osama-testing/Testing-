@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "Userpanel";
 }
@@ -12,7 +13,7 @@
     <button type="button" class="btn btn-outline-success" value="ThisWeek" onclick="LoadMeetingsData(this.value)">This Week</button>&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="button" class="btn btn-outline-success" value="ThisMonth" onclick="LoadMeetingsData(this.value)">This Month</button>&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="button" class="btn btn-outline-success" value="All" onclick="LoadMeetingsData(this.value)">Show All</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="text"class="btn btn-outline-success"  id="datepicker" onchange="GetDateTime()">
+    <input type="text" class="btn btn-outline-success" id="datepicker" onchange="GetDateTime()" placeholder="Filter By Date">
     <button id="btn" class="btn btn-outline-success" style="float:right">Download Meeting List</button>
 </div>
 <hr />
@@ -34,11 +35,8 @@
 
 <script>
 
-    $(function () {
-        $("#datepicker").datepicker();
-       
-    });
     $(document).ready(function () {
+       $("#datepicker").datepicker();
         $("#btn").click(function () {
             $("#table").table2excel({
                 // exclude CSS class
@@ -52,13 +50,9 @@
     });
     function GetDateTime()
     {
-        debugger
-
         var jsDate = $('#datepicker').val();
          LoadMeetingsByDate(jsDate);
-        
     }
-
     function LoadMeetingsData(val) {
         debugger
         $.ajax({

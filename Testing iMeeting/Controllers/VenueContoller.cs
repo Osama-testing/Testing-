@@ -8,15 +8,15 @@ using System.Web.Mvc;
 
 namespace Testing_iMeeting.Controllers
 {
-    public class VenueController : Controller
+    public class VenueContoller : Controller
     {
         readonly DB_Context _context;
    
         readonly IVenueRepository _VenueRepository;
-        public VenueController()
+        public VenueContoller()
         {
         }
-        public VenueController(IVenueRepository repository, DB_Context dB_Context)
+        public VenueContoller(IVenueRepository repository, DB_Context dB_Context)
         {
             this._VenueRepository = repository;
             this._context = dB_Context;

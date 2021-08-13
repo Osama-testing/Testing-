@@ -15,12 +15,9 @@ namespace Testing_iMeeting.Controllers
     public class UserPanelApiController : ApiController
     {
         private readonly IUserpanelRespository _UserpanelRespository;
-        readonly DB_Context _context;
-        public UserPanelApiController(IUserpanelRespository repository, DB_Context dB_Context)
+        public UserPanelApiController(IUserpanelRespository repository)
         {
             this._UserpanelRespository = repository;
-            this._context = dB_Context;
-
         }
         [HttpGet]
         public IHttpActionResult Get()
