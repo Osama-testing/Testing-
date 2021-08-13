@@ -316,7 +316,6 @@
     <Content Include="Views\iMeeting\Venue.cshtml" />
     <Content Include="Views\iMeeting\Meeting.cshtml" />
     <Content Include="Views\iMeeting\MeetingList.cshtml" />
-    <Content Include="Views\iMeeting\Test.cshtml" />
     <Content Include="Views\Shared\_gridForm.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>

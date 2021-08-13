@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<iMeeting.DAL.MeetingModel>
-
 @{
     ViewBag.Title = "Admin Portal";
 }
-
 <!-- Button trigger modal -->
 <br />
 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float:right">
@@ -62,7 +60,7 @@
 </table>
 
 <!-- Grid View  -->
-<div id="ShowGrid">
+<div id="ShowGrid" style="display:none">
    @{
         Html.RenderAction("GridForm", "iMeeting");
     }

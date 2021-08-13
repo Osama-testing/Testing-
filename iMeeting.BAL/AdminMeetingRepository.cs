@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,9 +26,20 @@ namespace iMeeting.BAL
         {
             if (Filter == "Today")
             {
-                DateTime dateTime = DateTime.Now;
-                var Today = dateTime.Date;
-                return _context.Meeting.Where(x => x.DateTime == Today && x.IsActive == 1).ToList();
+
+           
+              //  DateTime dateTime = DateTime.Today;
+                //var Today = dateTime.Date;
+                string Today = DateTime.Today.ToString("dd/MM/yyy");
+                //     DateTime dtFrom = Convert.ToDateTime(Today);
+                // DateTime date = DateTime.ParseExact(dateTime, "dd/MM/yyyy", null);
+                DateTime date =  DateTime.Today;
+                var formatted = date.ToString("dd/M/yyyy");
+                var a = Convert.ToDateTime(formatted);
+
+                return _context.Meeting.Where(x => x.DateTime ==Convert.ToDateTime( Today) && x.IsActive == 1).ToList();
+                var c = 0;
+
             }
             else if (Filter == "Tomorrow")
             {
