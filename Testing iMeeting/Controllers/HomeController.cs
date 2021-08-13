@@ -1,13 +1,5 @@
-﻿using ClosedXML.Excel;
-using iMeeting.BAL;
-using iMeeting.DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,35 +8,82 @@ namespace Testing_iMeeting.Controllers
 {
     public class HomeController : Controller
     {
-
-
-    
+        // GET: Home
         public ActionResult Index()
-        {         
-            return View();
-        }
-        [Authorize(Roles ="Admin")]
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-
-            ViewBag.Message = "Your contact page.";
-            return View();
-        }
-       // [Authorize]
-
-        public ActionResult Userpanel()
         {
             return View();
         }
 
+        // GET: Home/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
 
+        // GET: Home/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
 
+        // POST: Home/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Home/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: Home/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Home/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Home/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

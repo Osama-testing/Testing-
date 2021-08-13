@@ -286,9 +286,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -315,16 +312,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Views\VenueModels\Create.cshtml" />
-    <Content Include="Views\VenueModels\Delete.cshtml" />
-    <Content Include="Views\VenueModels\Details.cshtml" />
-    <Content Include="Views\VenueModels\Edit.cshtml" />
-    <Content Include="Views\VenueModels\Index.cshtml" />
     <Content Include="Scripts\json.json" />
     <Content Include="Views\iMeeting\Venue.cshtml" />
     <Content Include="Views\iMeeting\Meeting.cshtml" />
     <Content Include="Views\iMeeting\MeetingList.cshtml" />
     <Content Include="Views\iMeeting\Test.cshtml" />
+    <Content Include="Views\Shared\_gridForm.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\iMeeting.BAL\iMeeting.DAL.csproj">

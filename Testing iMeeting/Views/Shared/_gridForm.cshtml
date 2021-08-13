@@ -1,0 +1,55 @@
+﻿@model IEnumerable<iMeeting.DAL.MeetingModel>
+<style>i.fas {
+  display: inline-block;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px #888;
+  padding: 0.5em 0.5em;
+
+}</style>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="text-center" style="display: inline-block">
+    @foreach (var item in Model)
+    {
+
+        int modleCount = Model.Count();
+        <div style="display: inline-block">
+            <div style="width: 25rem;">
+                <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><b> @item.Title</b></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Info card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <i class="fas" style="float:right">
+                            @item.DateTime.Day<br /> @item.DateTime.ToString("MMMM") <br />
+                        </i>
+                        <br />
+                        @{
+                            if (item.Participants != null)
+                            {
+                                <i class='fas fa-user-alt' style="float:left">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </i>
+                            }
+                            else
+                            {
+                                <i style="color:firebrick;">No Participant Attending</i>
+                            }
+                        }
+                        <hr />
+                        <i class="fa fa-map-marker" style="color:black;float:left">&nbsp;&nbsp;&nbsp;@item.Location</i>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+
+        if (modleCount % 3 == 2)
+        {
+            <br />
+        }
+    }
+</div>

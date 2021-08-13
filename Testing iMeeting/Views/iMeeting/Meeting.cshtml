@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<iMeeting.DAL.MeetingModel>
 
 @{
-    ViewBag.Title = "Meeting";
+    ViewBag.Title = "Admin Portal";
 }
-@* Admin View *@
 
 <!-- Button trigger modal -->
 <br />
@@ -33,6 +32,7 @@
         </div>
     </div>
 </div>
+<!-- Filter Buttons -->
 <div>
     <b>Show:</b> &nbsp;&nbsp;&nbsp;&nbsp;
     <button type="button" class="btn btn-outline-success" value="Today" onclick=" LoadMeetingsData(this.value)">Today</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -40,16 +40,13 @@
     <button type="button" class="btn btn-outline-success" value="ThisWeek" onclick="LoadMeetingsData(this.value)">This Week</button>&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="button" class="btn btn-outline-success" value="ThisMonth" onclick="LoadMeetingsData(this.value)">This Month</button>&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="button" class="btn btn-outline-success" value="All" onclick="LoadMeetingsData(this.value)">Show All</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="text" class="btn btn-outline-success" id="datepicker" onchange="GetDateTime()" placeholder="Filter By Date">
+    <input  type="text"   class="btn btn-outline-success" id="datepicker" onchange="GetDateTime()" placeholder="Filter By Date">
     <button type="button" class="btn btn-outline-primary" style="float:right" id="hide">Grid</button>
     <button type="button" class="btn btn-outline-primary" style="float:right">Calender</button>
     <button type="button" class="btn btn-outline-primary" style="float:right" onclick="LoadMeetingsData()" id="show">List</button>
-
-
-
 </div>
 <hr />
-
+<!-- Table -->
 <table id="table" class="table table-striped" style="width:100%">
     <thead>
         <tr>
@@ -64,26 +61,38 @@
     <tbody class="tbody"></tbody>
 </table>
 
+<!-- Grid View  -->
 <div id="ShowGrid">
-
-  
-
+   @{
+        Html.RenderAction("GridForm", "iMeeting");
+    }
 </div>
 <script>
     $(document).ready(function () {
+        var b = "2021-08-13";
+
+        LoadMeetingsData();
         $("#hide").click(function () {
             $("#table").hide();
+            $("#ShowGrid").show();
+                    DatatableHide();
         });
         $("#show").click(function () {
+            $("#hide").show();
+            $("#ShowGrid").hide();
             $("#table").show();
-            $("#ShowGrid").show();
         });
         $("#datepicker").datepicker();
         $("#ShowGrid").hide();
-
-        LoadMeetingsData();
-
     });
+    function DatatableHide()
+    {
+           $('#table').DataTable( {
+             destroy: true,
+             searching: false,
+             paging: false, info: false
+            });
+    }
     function GetDateTime() {
         var jsDate = $('#datepicker').val();
         LoadMeetingsByDate(jsDate);
@@ -92,21 +101,25 @@
         $.ajax({
 
             url: "http://localhost:52092/api/AdminMeetingApi/MeetingListByAdmin?Filter=" + val,
+
             type: "GET",
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
                 var html = '';
                 $.each(result, function (key, item) {
+                    var comingDate = item.DateTime
+                    var changeDateFormat = moment(comingDate).format('D-MMM-yyyy');
+                    var time = moment(comingDate).format("HH:mm A"); 
                     html += '<tr>';
                     html += '<td>' + item.Title + '</td>';
                     html += '<td>' + item.Status + '</td>';
                     html += '<td>' + item.Location + '</td>';
-                    html += '<td>' + item.DateTime + '</td>';
+                    html += '<td>' + changeDateFormat +' /' +time +'</td>';
                     html += '<td>' + item.Participants + '</td>';
                     html += '<td>' + + '</td>';
                     html += '</tr>';
-                    console.log(key)
+
                 });
                 $('.tbody').html(html);
                 $('#table').DataTable();
@@ -156,20 +169,11 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!DOCTYPE html>
-<html>
-<head>
-    <script>
-        $(document).ready(function () {
 
-            $("#show").click(function () {
-                $("p").show();
-            });
+<script>
+    $(document).ready(function () {
+        $("#show").click(function () {
+            $("p").show();
         });
-    </script>
-</head>
-<body>
-
-
-</body>
-</html>
+    });
+</script>
