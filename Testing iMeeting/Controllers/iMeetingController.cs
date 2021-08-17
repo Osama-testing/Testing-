@@ -30,13 +30,7 @@ namespace Testing_iMeeting.Controllers
             return View();
         }
 
-        // GET: iMeeting *MEETING IN GRID FORM*
 
-        public PartialViewResult GridForm()
-        {
-            var b = db.Meeting.ToList();
-            return PartialView("_gridForm",b);
-        }
 
     }
 }

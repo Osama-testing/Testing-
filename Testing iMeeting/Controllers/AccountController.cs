@@ -147,12 +147,16 @@ namespace Testing_iMeeting.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+       // [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterViewModel model,string name , string email) 
         {
+            model.Email = email;
+            model.Name = name;
+            model.Password = "Qwerty@123";
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName =  model.Name, Email = model.Email };
+                var user = new ApplicationUser { UserName =  model.Email, Email = model.Email};
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -170,6 +174,9 @@ namespace Testing_iMeeting.Controllers
                 }
                 AddErrors(result);
             }
+            var errors = ModelState.Select(x => x.Value.Errors)
+                           .Where(y => y.Count > 0)
+                           .ToList();
 
             // If we got this far, something failed, redisplay form
             return View(model);

@@ -147,6 +147,10 @@
     <Compile Include="Migrations\202108101034582_changedatatype1.designer.cs">
       <DependentUpon>202108101034582_changedatatype1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108170839254_RegisterAddColoumn.cs" />
+    <Compile Include="Migrations\202108170839254_RegisterAddColoumn.designer.cs">
+      <DependentUpon>202108170839254_RegisterAddColoumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="VenueModel.cs" />
     <Compile Include="ManageViewModels.cs" />
@@ -177,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108101034582_changedatatype1.resx">
       <DependentUpon>202108101034582_changedatatype1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108170839254_RegisterAddColoumn.resx">
+      <DependentUpon>202108170839254_RegisterAddColoumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

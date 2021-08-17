@@ -2,6 +2,14 @@
 @{
     ViewBag.Title = "Admin Portal";
 }
+
+<style>
+    h5, h3 {
+        text-align: center;
+    }
+</style>
+
+<link href="~/Content/DateView.css" rel="stylesheet" />
 <!-- Button trigger modal -->
 <br />
 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float:right">
@@ -9,36 +17,98 @@
     Add New
 </button>
 <h4>Meetings</h4>
+
 <hr />
 
 <br />
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div id="exampleModal" class="modal">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <div class="modal-header" style="align-content:center; background-color:whitesmoke">
+                <h5 class="modal-title">Meeting Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <form>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8" style="padding-right:20px; border-right: 1px solid #ccc;">
+                                <input type="text" id="Title" class="form-control" placeholder="Meeting Title" />
+                                <hr />
+                                <label for="Agenda" class="form-label"><b>Agenda</b></label>
+                                <textarea class="form-control" id="Agenda" placeholder="Agenda"></textarea>
+                                <br />
+                                <label for="Notes" class="form-label"><b>Discussion Notes / Notes</b></label>
+                                <textarea class="form-control" id="Notes" placeholder="Discussion Notes"></textarea>
+                                <br />
+                                <label for="Files" class="form-label"><b>Files</b></label>
+                                <input type="file" id="File" class="form-control" />
+                                <br />
+                                <label for="Links" class="form-label"><b>Links</b></label>
+                                <input type="url" id="Url" class="form-control" placeholder="Links" />
+                                @*<input type="checkbox" class="form-control" />*@
+                            </div>
+                            <div class="col-sm-4">
+                                <h3><b>Role: Admin</b></h3><hr />
+                                <div style=" border: 2px solid  #DEE2E6; border-radius: 8px;text-align:center">
+                                    <h5 class="form-label" style="text-align:center"><b>Date / Time and Duration Details</b></h5>
+                                    <hr />
+                                    <label class="form-label"><b>Date / Time :</b></label><br />
+                                    <input type="datetime-local" id="DateTime" style="text-align:center" /><br />
+
+                                    <label class="form-label"><b>Meeting Duration :</b></label><br />
+                                    <select id="Duration">
+                                        <option style="text-align:center">--Select Duration--</option>
+                                        <option value="20">20 Minutes</option>
+                                        <option value="30">30 Minutes</option>
+                                        <option value="40">40 Minutes</option>
+                                        <option value="Y">Custom Duration</option>
+                                    </select><br />
+                                    <div id="CustomDuration" style="display: none">
+                                        <input type="number" id="Duration" placeholder="Custom Duration" />
+                                    </div>
+
+                                </div>     <br />
+                                <div style=" border: 2px solid  #DEE2E6; border-radius: 8px;text-align:center">
+                                    <h5 class="form-label" style="text-align:center"><b>Participants Details</b></h5>
+                                    <hr />
+                                    <label class="form-label"><b>Add Participants :</b></label><br />
+                                    ---
+                                </div> <br />
+                                <div style=" border: 2px solid  #DEE2E6; border-radius: 8px;text-align:center">
+                                    <h5 class="form-label" style="text-align:center"><b>Venue Details</b></h5>
+                                    <hr />
+                                    <label class="form-label"><b>Room / Location  :</b></label><br />
+                                    <select id="locality-dropdown" class="form-control-sm" name="locality"></select>
+                                </div> <br />
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" onclick="Add()" class="btn btn-success">Submit Meeting Request</button>
             </div>
         </div>
     </div>
 </div>
+
+
 <!-- Filter Buttons -->
-<div>
-    <b>Show:</b> &nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-outline-success" value="Today" onclick=" LoadMeetingsData(this.value)">Today</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-outline-success" value="Tomorrow" onclick="LoadMeetingsData(this.value)">Tomorrow</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-outline-success" value="ThisWeek" onclick="LoadMeetingsData(this.value)">This Week</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-outline-success" value="ThisMonth" onclick="LoadMeetingsData(this.value)">This Month</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-outline-success" value="All" onclick="LoadMeetingsData(this.value)">Show All</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input  type="text"   class="btn btn-outline-success" id="datepicker" onchange="GetDateTime()" placeholder="Filter By Date">
+<div id="buttons">
+
+    <b id="Show">Show:</b> &nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="today" type="button" class="btn btn-outline-success" value="Today" onclick=" LoadMeetingsData(this.value)">Today</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="Tomorrow" type="button" class="btn btn-outline-success" value="Tomorrow" onclick="LoadMeetingsData(this.value)">Tomorrow</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="Week" type="button" class="btn btn-outline-success" value="ThisWeek" onclick="LoadMeetingsData(this.value)">This Week</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="Month" type="button" class="btn btn-outline-success" value="ThisMonth" onclick="LoadMeetingsData(this.value)">This Month</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="All" type="button" class="btn btn-outline-success" value="All" onclick="LoadMeetingsData(this.value)">Show All</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" class="btn btn-outline-success" id="datepicker" onchange="GetDateTime()" placeholder="Filter By Date">
     <button type="button" class="btn btn-outline-primary" style="float:right" id="hide">Grid</button>
     <button type="button" class="btn btn-outline-primary" style="float:right">Calender</button>
     <button type="button" class="btn btn-outline-primary" style="float:right" onclick="LoadMeetingsData()" id="show">List</button>
@@ -59,41 +129,109 @@
     <tbody class="tbody"></tbody>
 </table>
 
+
 <!-- Grid View  -->
-<div id="ShowGrid" style="display:none">
-   @{
-        Html.RenderAction("GridForm", "iMeeting");
-    }
+<div id="ShowGrid" >
+
 </div>
 <script>
-    $(document).ready(function () {
-        var b = "2021-08-13";
+    function Add() {
 
+        debugger
+        var Param = {
+            //ID: $('#ID').val(),
+            Title: $('#Title').val(),
+            Agenda: $('#Agenda').val(),
+            Notes: $('#Notes').val(),
+            File: $('#File').val(),
+            Url: $('#Url').val(),
+            DateTime: $('#DateTime').val(),
+            Duration:$('#Duration').val()
+        };
+        console.log(Param);
+    }
+    $(document).ready(function () {
         LoadMeetingsData();
         $("#hide").click(function () {
             $("#table").hide();
             $("#ShowGrid").show();
-                    DatatableHide();
+            DatatableHide();
+            $("#today,#Tomorrow,#Week,#Month,#All,#datepicker,#Show").hide();
+
         });
         $("#show").click(function () {
             $("#hide").show();
             $("#ShowGrid").hide();
             $("#table").show();
+            $("#today,#Tomorrow,#Week,#Month,#All,#datepicker,#Show").show();
+            $('#table').DataTable();
+
         });
         $("#datepicker").datepicker();
         $("#ShowGrid").hide();
+        LoadMeetingInGrid();
+        LocationDropDown();
+
     });
-    function DatatableHide()
-    {
-           $('#table').DataTable( {
-             destroy: true,
-             searching: false,
-             paging: false, info: false
-            });
+    function DatatableHide() {
+        $('#table').DataTable({
+            destroy: true,
+            searching: false,
+            paging: false, info: false
+        });
     }
     function GetDateTime() {
         var jsDate = $('#datepicker').val();
         LoadMeetingsByDate(jsDate);
+    }
+    function LoadMeetingInGrid(val) {
+        $.ajax({
+            url: "http://localhost:52092/api/AdminMeetingApi/MeetingListByAdmin?Filter=" + val,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                debugger
+                var html = '';
+                $.each(result, function (key, item) {
+                    var comingDate = item.DateTime
+                    var changeDateFormat = moment(comingDate).format('D-MMM');
+                    var time = moment(comingDate).format("HH:mm A");
+                    if (item.Participants != null) {
+                        var _participants = '<i class="fas fa-user-alt" style="float:left">' +
+                            '<i class="fa fa-plus" aria-hidden="true"></i>' +
+                            '</i>'
+                    }
+                    else {
+                        var _participants = '<i style="color:firebrick;">No Participant Attending</i>'
+                    }
+                    html +=
+
+                        '<div class="text-center" style="display: inline-block; ">' +
+                        '<div style="display: inline-block">' +
+                        '<div style="width: 20rem;">' +
+                        '<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">' +
+                        '<div class="card-header"><b> ' + item.Title + '</b></div>' +
+                        '<div class="card-body">' +
+                        ' <h5 class="card-title"></h5>' +
+                        '<p class="card-text"></p>' +
+                        '<i class="fas" style="float:right"> ' + changeDateFormat + ' </i>' +
+                        '<i  style="float:left"> ' + _participants + ' </i>' +
+                        ' <br/><br/><br/><hr> <i class="fa fa-map-marker" style="color:green;float:left"> &nbsp;&nbsp;&nbsp;' + item.Location + '</i>' +
+                        ' </div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<br />' +
+                        '</div>' +
+                        '</div>'
+                });
+                $('#ShowGrid').html(html);
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+
     }
     function LoadMeetingsData(val) {
         $.ajax({
@@ -108,12 +246,12 @@
                 $.each(result, function (key, item) {
                     var comingDate = item.DateTime
                     var changeDateFormat = moment(comingDate).format('D-MMM-yyyy');
-                    var time = moment(comingDate).format("HH:mm A"); 
+                    var time = moment(comingDate).format("HH:mm A");
                     html += '<tr>';
                     html += '<td>' + item.Title + '</td>';
                     html += '<td>' + item.Status + '</td>';
                     html += '<td>' + item.Location + '</td>';
-                    html += '<td>' + changeDateFormat +' /' +time +'</td>';
+                    html += '<td>' + changeDateFormat + ' /' + time + '</td>';
                     html += '<td>' + item.Participants + '</td>';
                     html += '<td>' + + '</td>';
                     html += '</tr>';
@@ -161,7 +299,20 @@
         });
 
     }
-
+    function LocationDropDown() {
+                    let dropdown = $('#locality-dropdown');
+                    dropdown.empty();
+                    dropdown.append('<option selected="true" disabled>Choose Room/Location</option>');
+                    dropdown.prop('selectedIndex', 0);
+                    const url = 'http://localhost:52092/api/VenueApi/Get';
+                    // Populate dropdown with list of provinces
+                    $.getJSON(url, function (data) {
+                        $.each(data, function (key, entry) {
+                            dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.RoomName +'--Limit ('+ entry.Limit +')'));
+                      })
+                    });
+    }
+    
 </script>
 <script src="~/Scripts/jquery.table2excel.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -169,9 +320,13 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-    $(document).ready(function () {
-        $("#show").click(function () {
-            $("p").show();
+    $(function () {
+        $("#Duration").change(function () {
+            if ($(this).val() == "Y") {
+                $("#CustomDuration").show();
+            } else {
+                $("#CustomDuration").hide();
+            }
         });
     });
 </script>

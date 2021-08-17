@@ -8,6 +8,16 @@ namespace Testing_iMeeting.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpPost]
+        public JsonResult AjaxMethod(string name)
+        {
+            PersonModel person = new PersonModel
+            {
+                Name = name,
+                DateTime = DateTime.Now.ToString()
+            };
+            return Json(person);
+        }
         // GET: Home
         public ActionResult Index()
         {
@@ -85,5 +95,11 @@ namespace Testing_iMeeting.Controllers
                 return View();
             }
         }
+    }
+
+    internal class PersonModel
+    {
+        public string Name { get; internal set; }
+        public string DateTime { get; internal set; }
     }
 }
