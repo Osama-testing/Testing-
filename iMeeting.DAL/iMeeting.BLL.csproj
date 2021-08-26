@@ -119,6 +119,7 @@
     <Compile Include="Db_Context.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="MeetingModel.cs" />
+    <Compile Include="Meet_Participants_Models.cs" />
     <Compile Include="Migrations\202108070644042_Initial.cs" />
     <Compile Include="Migrations\202108070644042_Initial.designer.cs">
       <DependentUpon>202108070644042_Initial.cs</DependentUpon>
@@ -150,6 +151,18 @@
     <Compile Include="Migrations\202108170839254_RegisterAddColoumn.cs" />
     <Compile Include="Migrations\202108170839254_RegisterAddColoumn.designer.cs">
       <DependentUpon>202108170839254_RegisterAddColoumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108200452365_AddNewColumn.cs" />
+    <Compile Include="Migrations\202108200452365_AddNewColumn.designer.cs">
+      <DependentUpon>202108200452365_AddNewColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108200513490_AddColumn.cs" />
+    <Compile Include="Migrations\202108200513490_AddColumn.designer.cs">
+      <DependentUpon>202108200513490_AddColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108261224108_AdTblMeetingParticipants.cs" />
+    <Compile Include="Migrations\202108261224108_AdTblMeetingParticipants.designer.cs">
+      <DependentUpon>202108261224108_AdTblMeetingParticipants.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="VenueModel.cs" />
@@ -184,6 +197,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108170839254_RegisterAddColoumn.resx">
       <DependentUpon>202108170839254_RegisterAddColoumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108200452365_AddNewColumn.resx">
+      <DependentUpon>202108200452365_AddNewColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108200513490_AddColumn.resx">
+      <DependentUpon>202108200513490_AddColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108261224108_AdTblMeetingParticipants.resx">
+      <DependentUpon>202108261224108_AdTblMeetingParticipants.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

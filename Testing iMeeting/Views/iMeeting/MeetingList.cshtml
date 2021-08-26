@@ -36,6 +36,7 @@
 <script>
 
     $(document).ready(function () {
+       // var a = "AW12";
        $("#datepicker").datepicker();
         $("#btn").click(function () {
             $("#table").table2excel({
@@ -62,6 +63,7 @@
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
+              //  if ()
                 var html = '';
                 $.each(result, function (key, item) {
                     html += '<tr>';

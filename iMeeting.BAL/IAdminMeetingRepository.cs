@@ -14,6 +14,9 @@ namespace iMeeting.BAL
 
         IEnumerable<MeetingModel> FilterDate(string Filter);
 
+        void CreateMeeting(MeetingModel Meeting);
+        void CreateMeetingParticipants(Meet_Participants_Models meet_Participants);
+
 
 
     }

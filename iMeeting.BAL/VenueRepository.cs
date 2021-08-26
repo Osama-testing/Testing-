@@ -1,7 +1,10 @@
 ﻿using iMeeting.DAL;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +14,11 @@ namespace iMeeting.BAL
     public class VenueRepository : IVenueRepository
     {
         private DB_Context _context;
-        public VenueRepository(DB_Context dB_Context)
+        private  ApplicationDbContext _applicationDb;
+        public VenueRepository(DB_Context dB_Context, ApplicationDbContext applicationDb)
         {
             this._context = dB_Context;
+            this._applicationDb = applicationDb;
         }
 
         public IEnumerable<VenueModel> GetVenue()
@@ -43,7 +48,8 @@ namespace iMeeting.BAL
         public void UpdateVenue(VenueModel Venue)
         {
             _context.Entry(Venue).State = EntityState.Modified;
-            _context.SaveChanges();
         }
+
+  
     }
 }

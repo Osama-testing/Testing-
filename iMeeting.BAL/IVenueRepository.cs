@@ -16,6 +16,6 @@ namespace iMeeting.BAL
         void DeleteVenue(int? Id);
         VenueModel GetById(int? id);
         void UpdateVenue(VenueModel Venue);
-        
+
     }
 }

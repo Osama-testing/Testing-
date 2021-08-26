@@ -15,15 +15,15 @@ namespace iMeeting.BAL
     public class UserpanelRepository : IUserpanelRespository
     {
         private DB_Context _context;
+
         public UserpanelRepository(DB_Context dB_Context)
-        {
+        {           
             this._context = dB_Context;
         }
-        
+
 
         public IEnumerable<MeetingModel> GetMeeting()
-        {
-         
+        {           
             return _context.Meeting.Where(x=> x.IsActive==1).ToList();
         }
 
@@ -33,15 +33,12 @@ namespace iMeeting.BAL
 
             if (Filter=="Today")
             {
-                 DateTime dateTime = DateTime.Now;
-                var Today = dateTime.Date;
-                 return _context.Meeting.Where(x => x.DateTime == Today &&x.IsActive==1).ToList();
+                return _context.Meeting.Where(x => DateTime.Now.Day == x.DateTime.Day && DateTime.Now.Month == x.DateTime.Month && DateTime.Now.Year == x.DateTime.Year && x.IsActive == 1).ToList();
             }
             else if (Filter == "Tomorrow")
             {
-               var Today = DateTime.Today;
-               var Tomorrow = Today.AddDays(1) ;
-               return _context.Meeting.Where(x => x.DateTime == Tomorrow && x.IsActive == 1).ToList();
+                return _context.Meeting.Where(x => DateTime.Now.Day + 1 == x.DateTime.Day && DateTime.Now.Month == x.DateTime.Month && DateTime.Now.Year == x.DateTime.Year && x.IsActive == 1).ToList();
+
             }
             else if (Filter=="ThisMonth")
             {
@@ -66,7 +63,7 @@ namespace iMeeting.BAL
         public IEnumerable<MeetingModel> FilterDate(string Filter)
         {
             DateTime dtFrom = Convert.ToDateTime(Filter);
-            return _context.Meeting.Where(x => x.IsActive == 1 && x.DateTime == dtFrom).ToList();
+            return _context.Meeting.Where(x => x.IsActive == 1 && dtFrom.Day == x.DateTime.Day).ToList();
         }
     }
 }

@@ -18,9 +18,10 @@ namespace Testing_iMeeting.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext _context;
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -73,10 +74,13 @@ namespace Testing_iMeeting.Controllers
             {
                 return View(model);
             }
+            var query = _context.Users.Where(m => m.UserName.Equals(model.Email)).Select(m => m.FullName).FirstOrDefault();
+            TempData["Message"] = query;
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
@@ -148,14 +152,16 @@ namespace Testing_iMeeting.Controllers
         [HttpPost]
         [AllowAnonymous]
        // [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model,string name , string email) 
+        public async Task<ActionResult> Register(RegisterViewModel model,string name , string email,string designation) 
         {
             model.Email = email;
             model.Name = name;
+            model.FullName = name;
+            model.Designation = designation;
             model.Password = "Qwerty@123";
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName =  model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName =  model.Email, Email = model.Email ,Designation=model.Designation, FullName =model.FullName};
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

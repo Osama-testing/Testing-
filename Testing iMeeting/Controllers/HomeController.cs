@@ -1,26 +1,35 @@
-﻿using System;
+﻿using iMeeting.DAL;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Testing_iMeeting.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpPost]
-        public JsonResult AjaxMethod(string name)
-        {
-            PersonModel person = new PersonModel
-            {
-                Name = name,
-                DateTime = DateTime.Now.ToString()
-            };
-            return Json(person);
-        }
+        private DB_Context _context;
+
         // GET: Home
         public ActionResult Index()
         {
+           ViewBag.CustomerName = (string)TempData.Peek("Message");
+            //SqlConnection cn = new SqlConnection(@"Data Source=172.16.14.150;initial catalog=Osama_iMeeting1;persist security info=True;user id=qaserver;password=apple123!@#");
+            //string cs = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            //SqlCommand cmd = new SqlCommand("Select * from AspNetUsers", cn);
+            //DataSet ds = new DataSet();
+            //SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //da.Fill(ds);
+            //var jsonString = JsonConvert.SerializeObject(ds);
+
             return View();
         }
 
@@ -95,11 +104,27 @@ namespace Testing_iMeeting.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public JsonResult Upload()
+        { 
+            //var filesToDelete = HttpContext.Current.Request.Params["filesToDelete"]; this is for API
+
+            string userName = Request.Form["Agenda"];
+
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase file = Request.Files[i]; //Uploaded file
+                                                            //Use the following properties to get file's name, size and MIMEType
+                int fileSize = file.ContentLength;
+                string fileName = file.FileName;
+                string mimeType = file.ContentType;
+                System.IO.Stream fileContent = file.InputStream;
+                //To save file, use SaveAs method
+                file.SaveAs(Server.MapPath("/Files") + fileName); //File will be saved in application root
+            }
+            return Json("Uploaded " + Request.Files.Count + " files");
+        }
     }
 
-    internal class PersonModel
-    {
-        public string Name { get; internal set; }
-        public string DateTime { get; internal set; }
-    }
+
 }

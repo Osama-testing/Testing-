@@ -1,4 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using iMeeting.DAL;
+using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Owin;
 using Owin;
 using System.Web.Services.Description;
 
@@ -12,5 +15,8 @@ namespace Testing_iMeeting
             ConfigureAuth(app);
 
         }
+        // pretty standard initialisation so far
+
+
     }
 }

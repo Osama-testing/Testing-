@@ -12,7 +12,7 @@
 <link href="~/Content/DateView.css" rel="stylesheet" />
 <!-- Button trigger modal -->
 <br />
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float:right">
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="ClearTextBox()" style="float:right">
     <i class="fa fa-plus" aria-hidden="true"></i>
     Add New
 </button>
@@ -24,30 +24,32 @@
 <div id="exampleModal" class="modal">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header" style="align-content:center; background-color:whitesmoke">
-                <h5 class="modal-title">Meeting Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
+            <form >
+                @*action="http://localhost:52092/api/AdminMeetingApi/CreateMeeting">*@
+                <div class="modal-header" style="align-content:center; background-color:whitesmoke">
+                    <h5 class="modal-title">Meeting Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
 
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-8" style="padding-right:20px; border-right: 1px solid #ccc;">
-                                <input type="text" id="Title" class="form-control" placeholder="Meeting Title" />
+                                <input type="text" id="Title" class="form-control" placeholder="Meeting Title" required />
                                 <hr />
                                 <label for="Agenda" class="form-label"><b>Agenda</b></label>
                                 <textarea class="form-control" id="Agenda" placeholder="Agenda"></textarea>
                                 <br />
                                 <label for="Notes" class="form-label"><b>Discussion Notes / Notes</b></label>
-                                <textarea class="form-control" id="Notes" placeholder="Discussion Notes"></textarea>
+                                <textarea class="form-control" id="Notes" placeholder="Discussion Notes" required></textarea>
                                 <br />
                                 <label for="Files" class="form-label"><b>Files</b></label>
-                                <input type="file" id="File" class="form-control" />
+                                <input type="file" id="File"
+                                       class="form-control" />
                                 <br />
                                 <label for="Links" class="form-label"><b>Links</b></label>
                                 <input type="url" id="Url" class="form-control" placeholder="Links" />
-                                @*<input type="checkbox" class="form-control" />*@
                             </div>
                             <div class="col-sm-4">
                                 <h3><b>Role: Admin</b></h3><hr />
@@ -55,18 +57,18 @@
                                     <h5 class="form-label" style="text-align:center"><b>Date / Time and Duration Details</b></h5>
                                     <hr />
                                     <label class="form-label"><b>Date / Time :</b></label><br />
-                                    <input type="datetime-local" id="DateTime" style="text-align:center" /><br />
+                                    <input type="datetime-local" id="DateTime" style="text-align:center" required /><br />
 
                                     <label class="form-label"><b>Meeting Duration :</b></label><br />
                                     <select id="Duration">
-                                        <option style="text-align:center">--Select Duration--</option>
+                                        <option style="text-align:center">Select Duration</option>
                                         <option value="20">20 Minutes</option>
                                         <option value="30">30 Minutes</option>
                                         <option value="40">40 Minutes</option>
                                         <option value="Y">Custom Duration</option>
                                     </select><br />
                                     <div id="CustomDuration" style="display: none">
-                                        <input type="number" id="Duration" placeholder="Custom Duration" />
+                                        <input type="number" id="Duration_one" placeholder="Custom Duration" />
                                     </div>
 
                                 </div>     <br />
@@ -74,26 +76,29 @@
                                     <h5 class="form-label" style="text-align:center"><b>Participants Details</b></h5>
                                     <hr />
                                     <label class="form-label"><b>Add Participants :</b></label><br />
-                                    ---
+                                    <select id="Users-dropdown" class="form-control-sm" required multiple></select>
+
                                 </div> <br />
                                 <div style=" border: 2px solid  #DEE2E6; border-radius: 8px;text-align:center">
                                     <h5 class="form-label" style="text-align:center"><b>Venue Details</b></h5>
                                     <hr />
                                     <label class="form-label"><b>Room / Location  :</b></label><br />
-                                    <select id="locality-dropdown" class="form-control-sm" name="locality"></select>
+                                    <select id="locality-dropdown" class="form-control-sm" required></select>
                                 </div> <br />
 
-
+                                @*name="locality"*@
                             </div>
 
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" onclick="Add()" class="btn btn-success">Submit Meeting Request</button>
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick=" CreaeMeeting()" class="btn btn-success">Submit Meeting Request</button>
+                    @*<input type="submit" value="Upload" />*@
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -135,21 +140,6 @@
 
 </div>
 <script>
-    function Add() {
-
-        debugger
-        var Param = {
-            //ID: $('#ID').val(),
-            Title: $('#Title').val(),
-            Agenda: $('#Agenda').val(),
-            Notes: $('#Notes').val(),
-            File: $('#File').val(),
-            Url: $('#Url').val(),
-            DateTime: $('#DateTime').val(),
-            Duration:$('#Duration').val()
-        };
-        console.log(Param);
-    }
     $(document).ready(function () {
         LoadMeetingsData();
         $("#hide").click(function () {
@@ -171,8 +161,63 @@
         $("#ShowGrid").hide();
         LoadMeetingInGrid();
         LocationDropDown();
-
+        ParticipantsDropDown()
     });
+    function CreaeMeeting() {
+            
+            debugger
+            if ($('#Duration').val() == "Y") {
+                var Param = {
+                               //ID: $('#ID').val(),
+                    Title: $('#Title').val(),
+                    Agenda: $('#Agenda').val(),
+                    Notes: $('#Notes').val(),
+                    File: $('#File').val(),
+                    Links: $('#Url').val(),
+                    DateTime: $('#DateTime').val(),
+                    Duration: $('#Duration_one').val(),
+                    Location: $('#locality-dropdown').val(),
+                   //  Participants: $('#Users-dropdown').val(),
+                    IsActive: 1
+                };
+            }
+            else {
+                var Param = {
+                          //ID: $('#ID').val(),
+                    Title: $('#Title').val(),
+                    Agenda: $('#Agenda').val(),
+                    Notes: $('#Notes').val(),
+                    File: $('#File').val(),
+                    Links: $('#Url').val(),
+                    DateTime: $('#DateTime').val(),
+                    Duration: $('#Duration').val(),
+                    Location: $('#locality-dropdown').val(),
+                   // Participants: $('#Users-dropdown').val(),
+                    IsActive: 1
+                };
+            }
+            if (Param.Title == "" || Param.Agenda == "" || Param.Notes == "") { console.log("Validation Error !!") }
+            else {  
+                var a = $('#Users-dropdown').val();
+                var b ="444"
+                $.ajax({
+                    url: "http://localhost:52092/api/AdminMeetingApi/CreateMeeting?Title=" + Param.Title + "&Agenda=" + Param.Agenda + "&Notes=" + Param.Notes + "&Links=" + Param.Links + "&DateTime=" + Param.DateTime + "&Duration=" + Param.Duration + "&Location=" + Param.Location,                 
+                    data: JSON.stringify(a), //stringify is important
+                    type: "POST",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        $('#exampleModal').modal('hide');
+                        ClearTextBox();
+                       toastr.success('Added Successfully !!');
+                       LoadMeetingsData();
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+    }
     function DatatableHide() {
         $('#table').DataTable({
             destroy: true,
@@ -191,7 +236,6 @@
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
-                debugger
                 var html = '';
                 $.each(result, function (key, item) {
                     var comingDate = item.DateTime
@@ -235,9 +279,7 @@
     }
     function LoadMeetingsData(val) {
         $.ajax({
-
             url: "http://localhost:52092/api/AdminMeetingApi/MeetingListByAdmin?Filter=" + val,
-
             type: "GET",
             contentType: "application/json",
             dataType: "json",
@@ -268,6 +310,7 @@
     }
     function LoadMeetingsByDate(val) {
         console.log(val);
+        debugger
         let Url = 'http://localhost:52092/api/AdminMeetingApi/MeetingFilter?Filter=' + val
         // console.log(Url);
         $.ajax({
@@ -308,18 +351,39 @@
                     // Populate dropdown with list of provinces
                     $.getJSON(url, function (data) {
                         $.each(data, function (key, entry) {
-                            dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.RoomName +'--Limit ('+ entry.Limit +')'));
+                            dropdown.append($('<option></option>').attr('value', entry.RoomName).text(entry.RoomName +'--Limit ('+ entry.Limit +')'));
                       })
                     });
     }
-    
-</script>
-<script src="~/Scripts/jquery.table2excel.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    function ParticipantsDropDown() {
+            
+                    let dropdown = $('#Users-dropdown');
+                    dropdown.empty();
+                    dropdown.append('<option selected="true" disabled>Choose People/Participants</option>');
+                    dropdown.prop('selectedIndex', 0);
+                    const url = 'http://localhost:52092/api/VenueApi/GetUsersData';
+                    // Populate dropdown with list of provinces
+        $.getJSON(url, function (data) {
+            
+            $.each(data, function (key, entry) {
+                console.log(entry);
+                          //  dropdown.append($('<option></option>').attr('value', entry.Id).text(entry.Name +'--Limit ('+ entry.Limit +')'));
 
-<script>
+                            dropdown.append("<option value='"+entry.Id+"'>"+entry.FullName+"</option>");
+                      })
+                    });
+    }
+    function ClearTextBox() {
+        $('#Title').val("");
+        $('#Agenda').val("");
+        $('#Notes').val("");
+        $('#File').val("");
+        $('#Url').val("");
+        $('#DateTime').val("");
+
+        //$('#btnUpdate').hide();
+
+        }
     $(function () {
         $("#Duration").change(function () {
             if ($(this).val() == "Y") {
@@ -329,4 +393,43 @@
             }
         });
     });
+
+
+  
 </script>
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+@*<form id="uploader">
+    <input id="fileInput" type="file" multiple>
+    <input type="submit" value="Upload file" />
+</form>*@
+@*<script>
+    window.onload = function () {
+    document.getElementById('uploader').onsubmit = function () {
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('fileInput');
+        //Iterating through each files selected in fileInput
+        for (i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        }
+       // formdata.append('Title', $('#Title').val())
+       // formdata.append('Agenda', $('#Agenda').val())
+        formdata.append('Agenda', 'Manas')
+        //Creating an XMLHttpRequest and sending
+        var xhr = new XMLHttpRequest();
+        //xhr.open('POST', 'http://localhost:52092/api/AdminMeetingApi/CreateMeeting?meeting=');
+        xhr.send(formdata);
+        console.log(formdata)
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.responseText);
+            }
+        }
+        return false;
+    }
+}
+</script>*@
