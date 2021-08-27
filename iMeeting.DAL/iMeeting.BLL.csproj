@@ -119,7 +119,7 @@
     <Compile Include="Db_Context.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="MeetingModel.cs" />
-    <Compile Include="Meet_Participants_Models.cs" />
+    <Compile Include="Meeting_Participants.cs" />
     <Compile Include="Migrations\202108070644042_Initial.cs" />
     <Compile Include="Migrations\202108070644042_Initial.designer.cs">
       <DependentUpon>202108070644042_Initial.cs</DependentUpon>
@@ -164,7 +164,37 @@
     <Compile Include="Migrations\202108261224108_AdTblMeetingParticipants.designer.cs">
       <DependentUpon>202108261224108_AdTblMeetingParticipants.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108270508133_AddPrimaryKey.cs" />
+    <Compile Include="Migrations\202108270508133_AddPrimaryKey.designer.cs">
+      <DependentUpon>202108270508133_AddPrimaryKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108270509304_AddTableName.cs" />
+    <Compile Include="Migrations\202108270509304_AddTableName.designer.cs">
+      <DependentUpon>202108270509304_AddTableName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108270531419_DropTable.cs" />
+    <Compile Include="Migrations\202108270531419_DropTable.designer.cs">
+      <DependentUpon>202108270531419_DropTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108270604283_AdddTestingTbl.cs" />
+    <Compile Include="Migrations\202108270604283_AdddTestingTbl.designer.cs">
+      <DependentUpon>202108270604283_AdddTestingTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108270610424_Addtbl.cs" />
+    <Compile Include="Migrations\202108270610424_Addtbl.designer.cs">
+      <DependentUpon>202108270610424_Addtbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108270719418_DropTbl.cs" />
+    <Compile Include="Migrations\202108270719418_DropTbl.designer.cs">
+      <DependentUpon>202108270719418_DropTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108270746466_CreateTblMeetingStatus.cs" />
+    <Compile Include="Migrations\202108270746466_CreateTblMeetingStatus.designer.cs">
+      <DependentUpon>202108270746466_CreateTblMeetingStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="TestingTbl.cs" />
+    <Compile Include="TestingTbl2.cs" />
     <Compile Include="VenueModel.cs" />
     <Compile Include="ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,6 +236,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108261224108_AdTblMeetingParticipants.resx">
       <DependentUpon>202108261224108_AdTblMeetingParticipants.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108270508133_AddPrimaryKey.resx">
+      <DependentUpon>202108270508133_AddPrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108270509304_AddTableName.resx">
+      <DependentUpon>202108270509304_AddTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108270531419_DropTable.resx">
+      <DependentUpon>202108270531419_DropTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108270604283_AdddTestingTbl.resx">
+      <DependentUpon>202108270604283_AdddTestingTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108270610424_Addtbl.resx">
+      <DependentUpon>202108270610424_Addtbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108270719418_DropTbl.resx">
+      <DependentUpon>202108270719418_DropTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108270746466_CreateTblMeetingStatus.resx">
+      <DependentUpon>202108270746466_CreateTblMeetingStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

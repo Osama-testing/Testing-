@@ -74,8 +74,10 @@ namespace Testing_iMeeting.Controllers
             {
                 return View(model);
             }
-            var query = _context.Users.Where(m => m.UserName.Equals(model.Email)).Select(m => m.FullName).FirstOrDefault();
-            TempData["Message"] = query;
+            //var query = _context.Users.Where(m => m.UserName.Equals(model.Email)).Select(m => m.FullName).FirstOrDefault();          
+            var query = _context.Users.Where(m => m.UserName.Equals(model.Email)).Select(m => m.Id).FirstOrDefault();
+            TempData["LoginUserId"] = query;
+           // TempData["Message"] = query;
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true

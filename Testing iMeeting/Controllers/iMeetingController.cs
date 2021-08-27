@@ -27,6 +27,7 @@ namespace Testing_iMeeting.Controllers
         // GET: iMeeting *MEETING LIST BY USER*
         public ActionResult MeetingList()
         {
+
             return View();
         }
 

@@ -48,6 +48,7 @@ namespace iMeeting.BAL
         public void UpdateVenue(VenueModel Venue)
         {
             _context.Entry(Venue).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
   

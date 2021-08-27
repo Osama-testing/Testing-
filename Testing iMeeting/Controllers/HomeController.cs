@@ -20,7 +20,24 @@ namespace Testing_iMeeting.Controllers
         // GET: Home
         public ActionResult Index()
         {
-           ViewBag.CustomerName = (string)TempData.Peek("Message");
+
+
+            // Part 1: create list of strings.
+            List<string> animals = new List<string>();
+            animals.Add("bird");
+            animals.Add("bee");
+            animals.Add("cat");
+
+            // Part 2: use string.Join and pass the list as an argument.
+            string result = string.Join(",", animals);
+            Console.WriteLine($"RESULT: {result}");
+            ///////
+            string id;
+            id = User.Identity.GetUserId();
+          //  id = RequestContext.Principal.Identity.GetUserId();
+
+            ViewBag.CustomerName = (string)TempData.Peek("Message");
+            string test = System.Web.HttpContext.Current.User.Identity.GetUserId();
             //SqlConnection cn = new SqlConnection(@"Data Source=172.16.14.150;initial catalog=Osama_iMeeting1;persist security info=True;user id=qaserver;password=apple123!@#");
             //string cs = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 

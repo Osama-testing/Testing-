@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -22,13 +23,16 @@ namespace iMeeting.BAL
         }
 
 
-        public IEnumerable<MeetingModel> GetMeeting()
-        {           
+        public IEnumerable<MeetingModel> GetMeeting()     
+         // public IEnumerable<MeetingModel> GetMeeting()
+        {
+          //  list.Where(x => x.myTextColumn.StartWith('abc'));
+
             return _context.Meeting.Where(x=> x.IsActive==1).ToList();
         }
 
         
-        public IEnumerable<MeetingModel> FliterMeeting(String Filter)
+        public IEnumerable<MeetingModel> FliterMeeting(String Filter, string currentLoginUserId)
         {
 
             if (Filter=="Today")
@@ -54,7 +58,7 @@ namespace iMeeting.BAL
                 return _context.Meeting.Where(x => x.DateTime>= Today && x.DateTime< ThisWeek && x.IsActive == 1).ToList();
               
             }
-            return _context.Meeting.Where(x=> x.IsActive==1).ToList();
+            return _context.Meeting.Where(x=> x.IsActive==1  && x.Participants.Contains(currentLoginUserId)).ToList();
            
         }
 
@@ -64,6 +68,17 @@ namespace iMeeting.BAL
         {
             DateTime dtFrom = Convert.ToDateTime(Filter);
             return _context.Meeting.Where(x => x.IsActive == 1 && dtFrom.Day == x.DateTime.Day).ToList();
+        }
+
+        public void UpdateMeetingStatus(Meeting_Participants Participants)
+        {
+            _context.Entry(Participants).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public Meeting_Participants GetById(int? id)
+        {
+            return _context.Meeting_Participants.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
     }
 }

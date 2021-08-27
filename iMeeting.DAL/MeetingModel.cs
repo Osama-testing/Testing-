@@ -11,7 +11,7 @@ namespace iMeeting.DAL
     [Table("Meeting")]
     public class MeetingModel
     {
-
+        [Key]
         public int Id { get; set; }
         [MaxLength(50)]
         public string Title { get; set; }

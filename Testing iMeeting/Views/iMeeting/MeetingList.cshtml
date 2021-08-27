@@ -17,6 +17,7 @@
     <button id="btn" class="btn btn-outline-success" style="float:right">Download Meeting List</button>
 </div>
 <hr />
+
 <table id="table" class="table table-striped" style="width:100%">
     <thead>
         <tr>
@@ -32,12 +33,15 @@
     <tbody class="tbody"></tbody>
 </table>
 
-
+<input type="button" value="mybutton1" onclick="dosomething(this.value)">
 <script>
-
+    function dosomething(val){
+  console.log(val);
+}
     $(document).ready(function () {
-       // var a = "AW12";
-       $("#datepicker").datepicker();
+
+        // var a = "AW12";
+        $("#datepicker").datepicker();
         $("#btn").click(function () {
             $("#table").table2excel({
                 // exclude CSS class
@@ -49,13 +53,16 @@
         });
         LoadMeetingsData();
     });
-    function GetDateTime()
-    {
+    $(document).on("click", "#acceptBtn", function () {
+        AcceptMeeting("' + item.Id + '")
+        alert('test');
+    });
+    function GetDateTime() {
         var jsDate = $('#datepicker').val();
-         LoadMeetingsByDate(jsDate);
+        LoadMeetingsByDate(jsDate);
     }
     function LoadMeetingsData(val) {
-        debugger
+        //debugger
         $.ajax({
 
             url: "http://localhost:52092/api/UserPanelApi/Filters?Filter=" + val,
@@ -63,19 +70,22 @@
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
-              //  if ()
+                //  if ()
                 var html = '';
                 $.each(result, function (key, item) {
+                    var accept = 1;
+                    var reject = 0;
                     html += '<tr>';
                     html += '<td>' + item.Title + '</td>';
                     html += '<td>' + item.Status + '</td>';
                     html += '<td>' + item.Location + '</td>';
                     html += '<td>' + item.DateTime + '</td>';
                     html += '<td>' + item.Duration + '    Minutes' + '</td>';
-                    html += '<td>' + item.Participants + '</td>';
-                    html += '<td>' + '<button type="button" class="btn btn-success btn-sm">Accept</button> <button type="button" class="btn btn-danger btn-sm">Decline</button>' + '</td>';
+                    html += '<td>'+"<i style='font-size:24px' class='fas'>&#xf406;</i>"+'</td>';
+                    //html += '<td>' + item.Participants + '</td>';
+                    html += '<td>' + '<button type="button" class="btn btn-success btn-sm" onclick="AcceptMeeting(\'' + item.Id + '\',\'' + accept + '\');" >Accept</button> <button type="button"  class="btn btn-danger btn-sm" onclick="AcceptMeeting(\'' + item.Id + '\',\'' + reject + '\');">Decline</button>' + '</td>';
                     html += '</tr>';
-                    console.log(item.id)
+                    console.log(item.Id)
                 });
                 $('.tbody').html(html);
                 $('#table').DataTable();
@@ -85,12 +95,13 @@
             }
         });
 
-        }
+    }
     function LoadMeetingsByDate(val) {
+        //debugger
         console.log(val);
         let Url = 'http://localhost:52092/api/UserPanelApi/FilterByDate?Filter=' + val
-       // let Url = 'http://localhost:52092/api/UserPanelApi/FilterByDatetest?Filter=Wed Aug 11 2021 00:00:00 GMT+0500 (Pakistan Standard Time)';
-       // console.log(Url);
+        // let Url = 'http://localhost:52092/api/UserPanelApi/FilterByDatetest?Filter=Wed Aug 11 2021 00:00:00 GMT+0500 (Pakistan Standard Time)';
+        // console.log(Url);
         $.ajax({
 
             url: Url,
@@ -119,6 +130,24 @@
             }
         });
 
+    }
+    function AcceptMeeting(Id,Value) {
+        debugger
+        let Url = "http://localhost:52092/api/UserPanelApi/UpdateMeetingStatus?Meeting_Id=" + Id + "&Status=" + Value
+        $.ajax({
+
+            url: Url,
+            type: "Post",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                // console.log(item.id)
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
     }
 </script>
 <script src="~/Scripts/jquery.table2excel.js"></script>

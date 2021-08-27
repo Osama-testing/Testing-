@@ -9,9 +9,12 @@ namespace iMeeting.BAL
 {
   public   interface IUserpanelRespository
     {
+       //IEnumerable<MeetingModel> GetMeeting(String currentLoginUserId);
         IEnumerable<MeetingModel> GetMeeting();
-        IEnumerable<MeetingModel> FliterMeeting(string Filter);
+        IEnumerable<MeetingModel> FliterMeeting(string Filter, String currentLoginUserId);
         IEnumerable<MeetingModel> FilterDate(string Filter);
+        void UpdateMeetingStatus(Meeting_Participants Participants);
+        Meeting_Participants GetById(int? id);
 
 
     }

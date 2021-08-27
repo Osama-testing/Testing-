@@ -199,7 +199,6 @@
             if (Param.Title == "" || Param.Agenda == "" || Param.Notes == "") { console.log("Validation Error !!") }
             else {  
                 var a = $('#Users-dropdown').val();
-                var b ="444"
                 $.ajax({
                     url: "http://localhost:52092/api/AdminMeetingApi/CreateMeeting?Title=" + Param.Title + "&Agenda=" + Param.Agenda + "&Notes=" + Param.Notes + "&Links=" + Param.Links + "&DateTime=" + Param.DateTime + "&Duration=" + Param.Duration + "&Location=" + Param.Location,                 
                     data: JSON.stringify(a), //stringify is important

@@ -16,7 +16,8 @@ namespace iMeeting.DAL
 
         public DbSet<VenueModel> Venue { get; set; }
         public DbSet<MeetingModel> Meeting { get; set; }
-        public DbSet<Meet_Participants_Models> Meet_Participants_Models { get; set; }
-
+        public DbSet<Meeting_Participants> Meeting_Participants { get; set; }
+      //  public DbSet<MeeetingStatus> Meetings { get; set; }
+       // public DbSet<TestingTbl2> TestingTbl2 { get; set; }
     }
 }

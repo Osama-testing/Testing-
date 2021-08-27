@@ -15,9 +15,14 @@ namespace Testing_iMeeting.Controllers
     public class AdminMeetingApiController : ApiController
     {
         private readonly IAdminMeetingRepository adminMeetingRepository;
-        public AdminMeetingApiController(IAdminMeetingRepository repository)
+        private DB_Context _context;
+        private ApplicationDbContext _contextApplication;
+
+        public AdminMeetingApiController(IAdminMeetingRepository repository, DB_Context dB_Context)
         {
             this.adminMeetingRepository = repository;
+            this._context = dB_Context;
+            _contextApplication = new ApplicationDbContext();
         }
         [HttpGet]
         public IHttpActionResult MeetingListByAdmin(string Filter)
@@ -30,44 +35,39 @@ namespace Testing_iMeeting.Controllers
             return Ok(adminMeetingRepository.FilterDate(Filter));
         }
         [HttpPost]
-        public IHttpActionResult CreateMeeting(string Title,string Agenda,string Notes,string Links,DateTime DateTime,int Duration, string Location, [FromBody]List<int> user)
+        public IHttpActionResult CreateMeeting(string Title,string Agenda,string Notes,string Links,DateTime DateTime,int Duration, string Location, [FromBody]List<string> user)
         {
             MeetingModel meeting = new MeetingModel();
+            string Participants = string.Join(",", user);
+
+            Meeting_Participants participants = new Meeting_Participants();
             meeting.Title = Title;
-            meeting.Agenda = Agenda;
+            meeting.Agenda = Agenda;      
             meeting.Notes = Notes;
-            meeting.Links = Links;
+            meeting.Links = Links;       
             meeting.DateTime = DateTime;
             meeting.Duration = Duration;
             meeting.Location = Location;
             meeting.IsActive = 1;
-
-           // Meet_Participants_Models participants_Models = new Meet_Participants_Models();
+            meeting.Participants = Participants;
             adminMeetingRepository.CreateMeeting(meeting);
-           // adminMeetingRepository.CreateMeetingParticipants(participants_Models);
-
+            ///////////////////////////////////////////////////////////////    
+            int User_Id = int.Parse(_context.Meeting
+                         .OrderByDescending(p => p.Id)
+                         .Select(r => r.Id)
+                         .First().ToString());       
+            for (int i = 0; i < user.Count(); i++)
+            {
+                var _user = user.ElementAt(i);
+                participants.Id = User_Id;
+                participants.Status = 0;
+                participants.Prticipants_Id = _user;               
+                adminMeetingRepository.CreateMeetingParticipants(participants);
+                //string userEmail = (from x in _contextApplication.Users
+                //                    where x.Id == _user
+                //                    select x.Email).SingleOrDefault();
+            }             
             return Ok(1);
-
-
-
-            //SqlConnection cn = new SqlConnection();
-            //SqlCommand cmd = new SqlCommand();
-            //cn.ConnectionString = "ConnectionString";
-            //List<string> str = new List<string>();
-            //cmd.Connection = cn;
-            //cmd.Connection.Open();
-            //cmd.CommandText = "SELECT code FROM employee WHERE Left = 'Y'";
-            //SqlDataReader dr = cmd.ExecuteReader();
-            //while (dr.Read())
-            //{
-            //    str.Add(dr.GetValue(0).ToString());
-            //}
-
-            //foreach (string p in str)
-            //{
-            //    Console.WriteLine(p);
-            //}
-
         }
         #region CreateFile
         //  [HttpPost]
