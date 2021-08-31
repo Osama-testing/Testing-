@@ -20,7 +20,6 @@ namespace Testing_iMeeting.Controllers
         string currentLoginUserId;
         public UserPanelApiController(IUserpanelRespository repository)
         {
-            //id = User.Identity.GetUserId();
             currentLoginUserId = RequestContext.Principal.Identity.GetUserId();
             this._UserpanelRespository = repository;
             _contextApplication = new ApplicationDbContext();
@@ -29,9 +28,7 @@ namespace Testing_iMeeting.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-
-            var a = _UserpanelRespository.GetMeeting();
-            
+            var a = _UserpanelRespository.GetMeeting();          
             return Ok(a);
         }
         [HttpGet]
@@ -51,7 +48,7 @@ namespace Testing_iMeeting.Controllers
 
         [HttpPost]
         public IHttpActionResult UpdateMeetingStatus(int Meeting_Id,int Status)
-      {
+          {
                 var a = _UserpanelRespository.GetById(Meeting_Id);
                 Meeting_Participants participants = new Meeting_Participants();
                 participants.Table_Id = a.Table_Id;

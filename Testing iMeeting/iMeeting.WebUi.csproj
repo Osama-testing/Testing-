@@ -248,7 +248,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserPanelApiController.cs" />
     <Compile Include="Controllers\VenueApiController.cs" />
-    <Compile Include="Controllers\VenueContoller.cs" />
+    <Compile Include="Email_Service\EmailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,6 +256,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\iDropDown.css" />
+    <Content Include="Scripts\adminMeeting.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -273,6 +275,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\DateView.css" />
+    <Content Include="Email_Service\EmailTemplate.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -292,7 +295,10 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\importFromAMS.js" />
     <Content Include="Scripts\jquery.table2excel.js" />
+    <Content Include="Scripts\userMeeting.js" />
+    <Content Include="Scripts\venueCRUD.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

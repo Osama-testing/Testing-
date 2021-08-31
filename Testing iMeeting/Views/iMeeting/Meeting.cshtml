@@ -3,12 +3,7 @@
     ViewBag.Title = "Admin Portal";
 }
 
-<style>
-    h5, h3 {
-        text-align: center;
-    }
-</style>
-
+<link href="~/Content/iDropDown.css" rel="stylesheet" />
 <link href="~/Content/DateView.css" rel="stylesheet" />
 <!-- Button trigger modal -->
 <br />
@@ -21,20 +16,23 @@
 <hr />
 
 <br />
+<!-- Create Meeting modal -->
 <div id="exampleModal" class="modal">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <form >
-                @*action="http://localhost:52092/api/AdminMeetingApi/CreateMeeting">*@
-                <div class="modal-header" style="align-content:center; background-color:whitesmoke">
-                    <h5 class="modal-title">Meeting Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+
+            @*action="http://localhost:52092/api/AdminMeetingApi/CreateMeeting">*@
+            <div class="modal-header" style="align-content:center; background-color:whitesmoke">
+                <h5 class="modal-title">Meeting Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
 
-                    <div class="container">
+                <div class="container">
+                    <form>
                         <div class="row">
+
                             <div class="col-sm-8" style="padding-right:20px; border-right: 1px solid #ccc;">
                                 <input type="text" id="Title" class="form-control" placeholder="Meeting Title" required />
                                 <hr />
@@ -88,21 +86,38 @@
 
                                 @*name="locality"*@
                             </div>
-
                         </div>
-                    </div>
+                    </form>
+                </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" onclick=" CreaeMeeting()" class="btn btn-success">Submit Meeting Request</button>
-                    @*<input type="submit" value="Upload" />*@
-                </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" onclick=" CreaeMeeting()" class="btn btn-success">Submit Meeting Request</button>
+                @*<input type="submit" value="Upload" />*@
+            </div>
+
         </div>
     </div>
 </div>
 
+<!-- Show Participants modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Meeting Participants</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body1">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Filter Buttons -->
 <div id="buttons">
@@ -128,7 +143,7 @@
             <th>Venue</th>
             <th>Date/Time</th>
             <th>Participants</th>
-            <th>Action</th>
+            <th></th>
         </tr>
     </thead>
     <tbody class="tbody"></tbody>
@@ -136,299 +151,12 @@
 
 
 <!-- Grid View  -->
-<div id="ShowGrid" >
-
+<div id="ShowGrid">
 </div>
-<script>
-    $(document).ready(function () {
-        LoadMeetingsData();
-        $("#hide").click(function () {
-            $("#table").hide();
-            $("#ShowGrid").show();
-            DatatableHide();
-            $("#today,#Tomorrow,#Week,#Month,#All,#datepicker,#Show").hide();
 
-        });
-        $("#show").click(function () {
-            $("#hide").show();
-            $("#ShowGrid").hide();
-            $("#table").show();
-            $("#today,#Tomorrow,#Week,#Month,#All,#datepicker,#Show").show();
-            $('#table').DataTable();
-
-        });
-        $("#datepicker").datepicker();
-        $("#ShowGrid").hide();
-        LoadMeetingInGrid();
-        LocationDropDown();
-        ParticipantsDropDown()
-    });
-    function CreaeMeeting() {
-            
-            debugger
-            if ($('#Duration').val() == "Y") {
-                var Param = {
-                               //ID: $('#ID').val(),
-                    Title: $('#Title').val(),
-                    Agenda: $('#Agenda').val(),
-                    Notes: $('#Notes').val(),
-                    File: $('#File').val(),
-                    Links: $('#Url').val(),
-                    DateTime: $('#DateTime').val(),
-                    Duration: $('#Duration_one').val(),
-                    Location: $('#locality-dropdown').val(),
-                   //  Participants: $('#Users-dropdown').val(),
-                    IsActive: 1
-                };
-            }
-            else {
-                var Param = {
-                          //ID: $('#ID').val(),
-                    Title: $('#Title').val(),
-                    Agenda: $('#Agenda').val(),
-                    Notes: $('#Notes').val(),
-                    File: $('#File').val(),
-                    Links: $('#Url').val(),
-                    DateTime: $('#DateTime').val(),
-                    Duration: $('#Duration').val(),
-                    Location: $('#locality-dropdown').val(),
-                   // Participants: $('#Users-dropdown').val(),
-                    IsActive: 1
-                };
-            }
-            if (Param.Title == "" || Param.Agenda == "" || Param.Notes == "") { console.log("Validation Error !!") }
-            else {  
-                var a = $('#Users-dropdown').val();
-                $.ajax({
-                    url: "http://localhost:52092/api/AdminMeetingApi/CreateMeeting?Title=" + Param.Title + "&Agenda=" + Param.Agenda + "&Notes=" + Param.Notes + "&Links=" + Param.Links + "&DateTime=" + Param.DateTime + "&Duration=" + Param.Duration + "&Location=" + Param.Location,                 
-                    data: JSON.stringify(a), //stringify is important
-                    type: "POST",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (result) {
-                        $('#exampleModal').modal('hide');
-                        ClearTextBox();
-                       toastr.success('Added Successfully !!');
-                       LoadMeetingsData();
-                    },
-                    error: function (errormessage) {
-                        alert(errormessage.responseText);
-                    }
-                });
-            }
-    }
-    function DatatableHide() {
-        $('#table').DataTable({
-            destroy: true,
-            searching: false,
-            paging: false, info: false
-        });
-    }
-    function GetDateTime() {
-        var jsDate = $('#datepicker').val();
-        LoadMeetingsByDate(jsDate);
-    }
-    function LoadMeetingInGrid(val) {
-        $.ajax({
-            url: "http://localhost:52092/api/AdminMeetingApi/MeetingListByAdmin?Filter=" + val,
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (result) {
-                var html = '';
-                $.each(result, function (key, item) {
-                    var comingDate = item.DateTime
-                    var changeDateFormat = moment(comingDate).format('D-MMM');
-                    var time = moment(comingDate).format("HH:mm A");
-                    if (item.Participants != null) {
-                        var _participants = '<i class="fas fa-user-alt" style="float:left">' +
-                            '<i class="fa fa-plus" aria-hidden="true"></i>' +
-                            '</i>'
-                    }
-                    else {
-                        var _participants = '<i style="color:firebrick;">No Participant Attending</i>'
-                    }
-                    html +=
-
-                        '<div class="text-center" style="display: inline-block; ">' +
-                        '<div style="display: inline-block">' +
-                        '<div style="width: 20rem;">' +
-                        '<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">' +
-                        '<div class="card-header"><b> ' + item.Title + '</b></div>' +
-                        '<div class="card-body">' +
-                        ' <h5 class="card-title"></h5>' +
-                        '<p class="card-text"></p>' +
-                        '<i class="fas" style="float:right"> ' + changeDateFormat + ' </i>' +
-                        '<i  style="float:left"> ' + _participants + ' </i>' +
-                        ' <br/><br/><br/><hr> <i class="fa fa-map-marker" style="color:green;float:left"> &nbsp;&nbsp;&nbsp;' + item.Location + '</i>' +
-                        ' </div>' +
-                        '</div>' +
-                        '</div>' +
-                        '<br />' +
-                        '</div>' +
-                        '</div>'
-                });
-                $('#ShowGrid').html(html);
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
-        });
-
-    }
-    function LoadMeetingsData(val) {
-        $.ajax({
-            url: "http://localhost:52092/api/AdminMeetingApi/MeetingListByAdmin?Filter=" + val,
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (result) {
-                var html = '';
-                $.each(result, function (key, item) {
-                    var comingDate = item.DateTime
-                    var changeDateFormat = moment(comingDate).format('D-MMM-yyyy');
-                    var time = moment(comingDate).format("HH:mm A");
-                    html += '<tr>';
-                    html += '<td>' + item.Title + '</td>';
-                    html += '<td>' + item.Status + '</td>';
-                    html += '<td>' + item.Location + '</td>';
-                    html += '<td>' + changeDateFormat + ' /' + time + '</td>';
-                    html += '<td>' + item.Participants + '</td>';
-                    html += '<td>' + + '</td>';
-                    html += '</tr>';
-
-                });
-                $('.tbody').html(html);
-                $('#table').DataTable();
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
-        });
-
-    }
-    function LoadMeetingsByDate(val) {
-        console.log(val);
-        debugger
-        let Url = 'http://localhost:52092/api/AdminMeetingApi/MeetingFilter?Filter=' + val
-        // console.log(Url);
-        $.ajax({
-
-            url: Url,
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (result) {
-                var html = '';
-                $.each(result, function (key, item) {
-                    html += '<tr>';
-                    html += '<td>' + item.Title + '</td>';
-                    html += '<td>' + item.Status + '</td>';
-                    html += '<td>' + item.Location + '</td>';
-                    html += '<td>' + item.DateTime + '</td>';
-                    html += '<td>' + item.Participants + '</td>';
-                    html += '<td>' + + '</td>';
-                    html += '</tr>';
-                    console.log(item.id)
-                });
-                $('.tbody').html(html);
-                $('#table').DataTable();
-
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
-        });
-
-    }
-    function LocationDropDown() {
-                    let dropdown = $('#locality-dropdown');
-                    dropdown.empty();
-                    dropdown.append('<option selected="true" disabled>Choose Room/Location</option>');
-                    dropdown.prop('selectedIndex', 0);
-                    const url = 'http://localhost:52092/api/VenueApi/Get';
-                    // Populate dropdown with list of provinces
-                    $.getJSON(url, function (data) {
-                        $.each(data, function (key, entry) {
-                            dropdown.append($('<option></option>').attr('value', entry.RoomName).text(entry.RoomName +'--Limit ('+ entry.Limit +')'));
-                      })
-                    });
-    }
-    function ParticipantsDropDown() {
-            
-                    let dropdown = $('#Users-dropdown');
-                    dropdown.empty();
-                    dropdown.append('<option selected="true" disabled>Choose People/Participants</option>');
-                    dropdown.prop('selectedIndex', 0);
-                    const url = 'http://localhost:52092/api/VenueApi/GetUsersData';
-                    // Populate dropdown with list of provinces
-        $.getJSON(url, function (data) {
-            
-            $.each(data, function (key, entry) {
-                console.log(entry);
-                          //  dropdown.append($('<option></option>').attr('value', entry.Id).text(entry.Name +'--Limit ('+ entry.Limit +')'));
-
-                            dropdown.append("<option value='"+entry.Id+"'>"+entry.FullName+"</option>");
-                      })
-                    });
-    }
-    function ClearTextBox() {
-        $('#Title').val("");
-        $('#Agenda').val("");
-        $('#Notes').val("");
-        $('#File').val("");
-        $('#Url').val("");
-        $('#DateTime').val("");
-
-        //$('#btnUpdate').hide();
-
-        }
-    $(function () {
-        $("#Duration").change(function () {
-            if ($(this).val() == "Y") {
-                $("#CustomDuration").show();
-            } else {
-                $("#CustomDuration").hide();
-            }
-        });
-    });
-
-
-  
-</script>
+<script src="~/Scripts/adminMeeting.js"></script>
 <script src="~/Scripts/jquery.table2excel.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-@*<form id="uploader">
-    <input id="fileInput" type="file" multiple>
-    <input type="submit" value="Upload file" />
-</form>*@
-@*<script>
-    window.onload = function () {
-    document.getElementById('uploader').onsubmit = function () {
-        var formdata = new FormData(); //FormData object
-        var fileInput = document.getElementById('fileInput');
-        //Iterating through each files selected in fileInput
-        for (i = 0; i < fileInput.files.length; i++) {
-            //Appending each file to FormData object
-            formdata.append(fileInput.files[i].name, fileInput.files[i]);
-        }
-       // formdata.append('Title', $('#Title').val())
-       // formdata.append('Agenda', $('#Agenda').val())
-        formdata.append('Agenda', 'Manas')
-        //Creating an XMLHttpRequest and sending
-        var xhr = new XMLHttpRequest();
-        //xhr.open('POST', 'http://localhost:52092/api/AdminMeetingApi/CreateMeeting?meeting=');
-        xhr.send(formdata);
-        console.log(formdata)
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                alert(xhr.responseText);
-            }
-        }
-        return false;
-    }
-}
-</script>*@

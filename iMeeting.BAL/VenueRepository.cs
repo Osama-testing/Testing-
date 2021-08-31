@@ -49,8 +49,6 @@ namespace iMeeting.BAL
         {
             _context.Entry(Venue).State = EntityState.Modified;
             _context.SaveChanges();
-        }
-
-  
+        } 
     }
 }

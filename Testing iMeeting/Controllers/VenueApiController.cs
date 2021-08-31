@@ -20,6 +20,7 @@ using Unity;
 
 namespace Testing_iMeeting.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class VenueApiController : ApiController
     {
         #region Constructor

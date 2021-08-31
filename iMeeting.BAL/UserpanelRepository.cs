@@ -22,16 +22,11 @@ namespace iMeeting.BAL
             this._context = dB_Context;
         }
 
-
         public IEnumerable<MeetingModel> GetMeeting()     
-         // public IEnumerable<MeetingModel> GetMeeting()
         {
-          //  list.Where(x => x.myTextColumn.StartWith('abc'));
-
             return _context.Meeting.Where(x=> x.IsActive==1).ToList();
         }
-
-        
+    
         public IEnumerable<MeetingModel> FliterMeeting(String Filter, string currentLoginUserId)
         {
 
@@ -61,9 +56,7 @@ namespace iMeeting.BAL
             return _context.Meeting.Where(x=> x.IsActive==1  && x.Participants.Contains(currentLoginUserId)).ToList();
            
         }
-
-
-       
+      
         public IEnumerable<MeetingModel> FilterDate(string Filter)
         {
             DateTime dtFrom = Convert.ToDateTime(Filter);

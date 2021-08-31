@@ -22,6 +22,7 @@ namespace iMeeting.DAL
         public string File { get; set; }
         public string Links { get; set; }
         public DateTime DateTime { get; set; }
+        public DateTime EndTime { get; set; }
         public int Duration { get; set; }
         public string Location { get; set; }
         public string Participants { get; set; }

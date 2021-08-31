@@ -11,12 +11,11 @@ namespace iMeeting.BAL
     {
         IEnumerable<MeetingModel> GetMeeting(string Filter);
         IEnumerable<MeetingModel> GetMeeting();
-
         IEnumerable<MeetingModel> FilterDate(string Filter);
-
         void CreateMeeting(MeetingModel Meeting);
         void CreateMeetingParticipants(Meeting_Participants meet_Participants);
-
+        MeetingModel GetById(int? id);
+        void CancelMeeting(MeetingModel Meeting);
 
 
     }

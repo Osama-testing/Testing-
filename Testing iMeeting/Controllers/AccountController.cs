@@ -74,13 +74,8 @@ namespace Testing_iMeeting.Controllers
             {
                 return View(model);
             }
-            //var query = _context.Users.Where(m => m.UserName.Equals(model.Email)).Select(m => m.FullName).FirstOrDefault();          
             var query = _context.Users.Where(m => m.UserName.Equals(model.Email)).Select(m => m.Id).FirstOrDefault();
-            TempData["LoginUserId"] = query;
-           // TempData["Message"] = query;
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            TempData["LoginUserId"] = query;      
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             
             switch (result)
@@ -170,7 +165,7 @@ namespace Testing_iMeeting.Controllers
                 {
                    // UserManager.AddToRole(user.Id, "Admin");
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -178,7 +173,7 @@ namespace Testing_iMeeting.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                //    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

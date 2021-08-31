@@ -1,9 +1,7 @@
 ﻿
-
 @{
     ViewBag.Title = "Userpanel";
 }
-
 <br>
 <br>
 <div>
@@ -17,7 +15,6 @@
     <button id="btn" class="btn btn-outline-success" style="float:right">Download Meeting List</button>
 </div>
 <hr />
-
 <table id="table" class="table table-striped" style="width:100%">
     <thead>
         <tr>
@@ -32,124 +29,25 @@
     </thead>
     <tbody class="tbody"></tbody>
 </table>
+<!-- Show Participants modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Meeting Participants</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body1">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<input type="button" value="mybutton1" onclick="dosomething(this.value)">
-<script>
-    function dosomething(val){
-  console.log(val);
-}
-    $(document).ready(function () {
-
-        // var a = "AW12";
-        $("#datepicker").datepicker();
-        $("#btn").click(function () {
-            $("#table").table2excel({
-                // exclude CSS class
-                // exclude: ".noExl",
-                name: "Worksheet Name",
-                filename: "Meeting List", //do not include extension
-                fileext: ".xls" // file extension
-            });
-        });
-        LoadMeetingsData();
-    });
-    $(document).on("click", "#acceptBtn", function () {
-        AcceptMeeting("' + item.Id + '")
-        alert('test');
-    });
-    function GetDateTime() {
-        var jsDate = $('#datepicker').val();
-        LoadMeetingsByDate(jsDate);
-    }
-    function LoadMeetingsData(val) {
-        //debugger
-        $.ajax({
-
-            url: "http://localhost:52092/api/UserPanelApi/Filters?Filter=" + val,
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (result) {
-                //  if ()
-                var html = '';
-                $.each(result, function (key, item) {
-                    var accept = 1;
-                    var reject = 0;
-                    html += '<tr>';
-                    html += '<td>' + item.Title + '</td>';
-                    html += '<td>' + item.Status + '</td>';
-                    html += '<td>' + item.Location + '</td>';
-                    html += '<td>' + item.DateTime + '</td>';
-                    html += '<td>' + item.Duration + '    Minutes' + '</td>';
-                    html += '<td>'+"<i style='font-size:24px' class='fas'>&#xf406;</i>"+'</td>';
-                    //html += '<td>' + item.Participants + '</td>';
-                    html += '<td>' + '<button type="button" class="btn btn-success btn-sm" onclick="AcceptMeeting(\'' + item.Id + '\',\'' + accept + '\');" >Accept</button> <button type="button"  class="btn btn-danger btn-sm" onclick="AcceptMeeting(\'' + item.Id + '\',\'' + reject + '\');">Decline</button>' + '</td>';
-                    html += '</tr>';
-                    console.log(item.Id)
-                });
-                $('.tbody').html(html);
-                $('#table').DataTable();
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
-        });
-
-    }
-    function LoadMeetingsByDate(val) {
-        //debugger
-        console.log(val);
-        let Url = 'http://localhost:52092/api/UserPanelApi/FilterByDate?Filter=' + val
-        // let Url = 'http://localhost:52092/api/UserPanelApi/FilterByDatetest?Filter=Wed Aug 11 2021 00:00:00 GMT+0500 (Pakistan Standard Time)';
-        // console.log(Url);
-        $.ajax({
-
-            url: Url,
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (result) {
-                var html = '';
-                $.each(result, function (key, item) {
-                    html += '<tr>';
-                    html += '<td>' + item.Title + '</td>';
-                    html += '<td>' + item.Status + '</td>';
-                    html += '<td>' + item.Location + '</td>';
-                    html += '<td>' + item.DateTime + '</td>';
-                    html += '<td>' + item.Duration + '    Minutes' + '</td>';
-                    html += '<td>' + item.Participants + '</td>';
-                    html += '<td>' + '<button type="button" class="btn btn-success btn-sm">Accept</button> <button type="button" class="btn btn-danger btn-sm">Decline</button>' + '</td>';
-                    html += '</tr>';
-                    console.log(item.id)
-                });
-                $('.tbody').html(html);
-                $('#table').DataTable();
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
-        });
-
-    }
-    function AcceptMeeting(Id,Value) {
-        debugger
-        let Url = "http://localhost:52092/api/UserPanelApi/UpdateMeetingStatus?Meeting_Id=" + Id + "&Status=" + Value
-        $.ajax({
-
-            url: Url,
-            type: "Post",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (result) {
-                // console.log(item.id)
-
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
-        });
-    }
-</script>
+<script src="~/Scripts/userMeeting.js"></script>
 <script src="~/Scripts/jquery.table2excel.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">

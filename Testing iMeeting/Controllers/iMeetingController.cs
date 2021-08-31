@@ -13,18 +13,21 @@ namespace Testing_iMeeting.Controllers
         DB_Context db = new DB_Context();
 
         // GET: iMeeting *VENUE CRUD BY ADMIN*
+        [Authorize(Roles = "Admin")]
         public ActionResult Venue()
         {
             return View();
         }
 
         // GET: iMeeting *Meeting CRUD BY ADMIN*
+        [Authorize(Roles = "Admin")]
         public ActionResult Meeting()
         {
             return View();
         }   
         
         // GET: iMeeting *MEETING LIST BY USER*
+        [Authorize]
         public ActionResult MeetingList()
         {
 

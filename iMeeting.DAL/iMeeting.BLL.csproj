@@ -192,9 +192,11 @@
     <Compile Include="Migrations\202108270746466_CreateTblMeetingStatus.designer.cs">
       <DependentUpon>202108270746466_CreateTblMeetingStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108300729445_AddColoumn.cs" />
+    <Compile Include="Migrations\202108300729445_AddColoumn.designer.cs">
+      <DependentUpon>202108300729445_AddColoumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="TestingTbl.cs" />
-    <Compile Include="TestingTbl2.cs" />
     <Compile Include="VenueModel.cs" />
     <Compile Include="ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -257,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108270746466_CreateTblMeetingStatus.resx">
       <DependentUpon>202108270746466_CreateTblMeetingStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108300729445_AddColoumn.resx">
+      <DependentUpon>202108300729445_AddColoumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

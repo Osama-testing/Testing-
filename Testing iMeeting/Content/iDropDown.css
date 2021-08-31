@@ -1,0 +1,10 @@
+﻿h5, h3 {
+    text-align: center;
+}
+
+.menu-icon-wrappe .dropdown-toggle::after {
+    display: none;
+}
+
+.menu-icon-wrappe i {
+}
