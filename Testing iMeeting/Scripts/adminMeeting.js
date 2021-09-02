@@ -179,6 +179,7 @@ function LoadMeetingsData(val) {
                     '  <ul class="dropdown-menu r" aria-labelledby="dropdownMenuButton1">' +
                     '  <li><a class="dropdown-item" onclick="CancelMeeting(\'' + item.Id + '\');">Cancel Meeting</a></li>' +
                     '  <li><a class="dropdown-item" onclick="EndMeeting(\'' + item.Id + '\');">End Meeting</a></li>' +
+                    '  <li><a class="dropdown-item" onclick="getbyID(\'' + item.Id + '\');">Edit Meeting</a></li>' +
                     '   </ul>' +
                     '</div>' + '</td>';
                 html += '</tr>';
@@ -325,6 +326,37 @@ function EndMeeting(Id) {
             }
         });
     }
+}
+function getbyID(ID) {
+    // debugger
+    $.ajax({
+
+        url: "http://localhost:52092/api/AdminMeetingApi/GetById?Id=" + ID,
+        type: "GET",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: function (result) {
+            $('#Title').val(result.Title);
+            $('#Agenda').val(result.Agenda);
+            $('#Notes').val(result.Notes);
+            $('#Url').val(result.Links);
+
+            $('#DateTime').val(result.DateTime);
+            $('#Duration').val(result.Duration);
+            $('#locality-dropdown').val(result.Location);
+            $('#Users-dropdown').val(result.Participants);
+
+
+            $('#exampleModal').modal('show');
+           // $('#btnUpdate').show();
+           // $('#btnAdd').hide();
+            console.log(result);
+
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
 }
 function CancelMeeting(Id) {
     debugger

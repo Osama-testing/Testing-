@@ -85,7 +85,7 @@ namespace iMeeting.BAL
 
         public MeetingModel GetById(int? id)
         {
-            return _context.Meeting.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return _context.Meeting.FirstOrDefault(x => x.Id == id);
 
         }
 

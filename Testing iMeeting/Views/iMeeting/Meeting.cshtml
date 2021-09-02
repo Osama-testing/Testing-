@@ -82,9 +82,7 @@
                                     <hr />
                                     <label class="form-label"><b>Room / Location  :</b></label><br />
                                     <select id="locality-dropdown" class="form-control-sm" required></select>
-                                </div> <br />
-
-                                @*name="locality"*@
+                                </div> <br />                              
                             </div>
                         </div>
                     </form>
@@ -93,7 +91,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" onclick=" CreaeMeeting()" class="btn btn-success">Submit Meeting Request</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+
+                <button type="submit" onclick=" CreaeMeeting()"  class="btn btn-success">Submit Meeting Request</button>
                 @*<input type="submit" value="Upload" />*@
             </div>
 

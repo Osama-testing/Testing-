@@ -15,7 +15,7 @@ using Testing_iMeeting.Email_Service;
 
 namespace Testing_iMeeting.Controllers
 {
-    //  [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminMeetingApiController : ApiController
     {
         private readonly IAdminMeetingRepository adminMeetingRepository;
@@ -151,6 +151,13 @@ namespace Testing_iMeeting.Controllers
                 sb.Append(",");
             }
             return Ok(sb.ToString());
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetbyId(int? Id)
+        {
+            var a = adminMeetingRepository.GetById(Id);
+            return Ok(a);
         }
 
         #region CreateFile

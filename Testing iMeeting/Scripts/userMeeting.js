@@ -108,14 +108,18 @@ function LoadMeetingsByDate(val) {
                 }
                 html += '<tr>';
                 html += '<td>' + item.Title + '</td>';
-                html += '<td>' + item.Status + '</td>';
+                html += '<td>' + _meetingStatus + '</td>';
                 html += '<td>' + item.Location + '</td>';
                 html += '<td>' + item.DateTime + '</td>';
                 html += '<td>' + item.Duration + '    Minutes' + '</td>';
                 //html += '<td>' + item.Participants + '</td>';
                 html += '<td>' + '<i class="fas fa-user-alt" style="float:left">' +
                     '<i class="fa fa-plus" aria-hidden="true"></i>' +
-                    '</i>' + '</td>';
+                    '</i>    ' +
+                    '<a href=""  class="fst-italic" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="GetParticipants(' + item.Id + ')" >' +
+                    'View' +
+                    '</a >' +
+                    '</td>';
                 html += '<td>' + '<button type="button" class="btn btn-success btn-sm" onclick="AcceptMeeting(\'' + item.Id + '\',\'' + accept + '\');" >Accept</button> <button type="button"  class="btn btn-danger btn-sm" onclick="AcceptMeeting(\'' + item.Id + '\',\'' + reject + '\');">Decline</button>' + '</td>';
                 html += '</tr>';
                 console.log(item.id)
