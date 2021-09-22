@@ -9,6 +9,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMeeting.BLL", "iMeeting.DA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iMeeting.DAL", "iMeeting.BAL\iMeeting.DAL.csproj", "{159F7012-78A9-47E0-B086-5B862CE51FA3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Designs", "Project Designs", "{F4FF1F07-77D8-4914-BD52-F4CA929E9610}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Pictures\Screenshots\iMeeting\Add Meeting (Admin View ).png = ..\..\..\Pictures\Screenshots\iMeeting\Add Meeting (Admin View ).png
+		..\..\..\Pictures\Screenshots\iMeeting\Cancell Meeting (Admin View ).png = ..\..\..\Pictures\Screenshots\iMeeting\Cancell Meeting (Admin View ).png
+		..\..\..\Pictures\Screenshots\iMeeting\Create Meeting(Admin VIew).png = ..\..\..\Pictures\Screenshots\iMeeting\Create Meeting(Admin VIew).png
+		..\..\..\Pictures\Screenshots\iMeeting\Create Room (Admin View  ).png = ..\..\..\Pictures\Screenshots\iMeeting\Create Room (Admin View  ).png
+		..\..\..\Pictures\Screenshots\iMeeting\Delete User.png = ..\..\..\Pictures\Screenshots\iMeeting\Delete User.png
+		..\..\..\Pictures\Screenshots\iMeeting\Edit Room (Admin View ).png = ..\..\..\Pictures\Screenshots\iMeeting\Edit Room (Admin View ).png
+		..\..\..\Pictures\Screenshots\iMeeting\Filter By date (Admin View ).png = ..\..\..\Pictures\Screenshots\iMeeting\Filter By date (Admin View ).png
+		..\..\..\Pictures\Screenshots\iMeeting\Import users from AMS.png = ..\..\..\Pictures\Screenshots\iMeeting\Import users from AMS.png
+		..\..\..\Pictures\Screenshots\iMeeting\Login.png = ..\..\..\Pictures\Screenshots\iMeeting\Login.png
+		..\..\..\Pictures\Screenshots\iMeeting\Meeting List(Admin View).png = ..\..\..\Pictures\Screenshots\iMeeting\Meeting List(Admin View).png
+		..\..\..\Pictures\Screenshots\iMeeting\User Meeting List View 2.png = ..\..\..\Pictures\Screenshots\iMeeting\User Meeting List View 2.png
+		..\..\..\Pictures\Screenshots\iMeeting\User Meeting List View.png = ..\..\..\Pictures\Screenshots\iMeeting\User Meeting List View.png
+		..\..\..\Pictures\Screenshots\iMeeting\Venue & User Management(Admin View ).png = ..\..\..\Pictures\Screenshots\iMeeting\Venue & User Management(Admin View ).png
+		..\..\..\Pictures\Screenshots\iMeeting\View Users(Admin View ).png = ..\..\..\Pictures\Screenshots\iMeeting\View Users(Admin View ).png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

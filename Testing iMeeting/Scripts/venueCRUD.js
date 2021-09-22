@@ -225,14 +225,13 @@ function LoadIdentityUsers() {
 
 }
 function DeleteUser(Id) {
-    debugger
+    //debugger
     console.log(Id);
     var ans = confirm("Are you sure you want to delete this Record?");
     //let Id = $(event.relatedTarget).find('#user');
     // console.log(Id);
 
     if (ans) {
-        debugger
         $.ajax({
             url: "http://localhost:52092/api/VenueApi/DellUsersData?Id=" + Id,
             type: "DELETE",
