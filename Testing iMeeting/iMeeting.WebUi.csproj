@@ -257,6 +257,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\iDropDown.css" />
+    <Content Include="Project UI\Add Meeting %28Admin View %29.png" />
+    <Content Include="Project UI\Cancell Meeting %28Admin View %29.png" />
+    <Content Include="Project UI\Create Meeting%28Admin VIew%29.png" />
+    <Content Include="Project UI\Create Room %28Admin View  %29.png" />
+    <Content Include="Project UI\Delete User.png" />
+    <Content Include="Project UI\Edit Room %28Admin View %29.png" />
+    <Content Include="Project UI\Filter By date %28Admin View %29.png" />
+    <Content Include="Project UI\Import users from AMS.png" />
+    <Content Include="Project UI\Login.png" />
+    <Content Include="Project UI\Meeting List%28Admin View%29.png" />
+    <Content Include="Project UI\User Meeting List View 2.png" />
+    <Content Include="Project UI\User Meeting List View.png" />
+    <Content Include="Project UI\Venue &amp; User Management%28Admin View %29.png" />
+    <Content Include="Project UI\View Users%28Admin View %29.png" />
     <Content Include="Scripts\adminMeeting.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />

@@ -12,9 +12,9 @@ using System.Text;
 using System.Web;
 using System.Web.Http;
 using Testing_iMeeting.Email_Service;
-
 namespace Testing_iMeeting.Controllers
 {
+
     [Authorize(Roles = "Admin")]
     public class AdminMeetingApiController : ApiController
     {
@@ -150,7 +150,7 @@ namespace Testing_iMeeting.Controllers
                 sb.Append(query);
                 sb.Append(",");
             }
-            return Ok(sb.ToString());
+            return Ok(sb.ToString().TrimEnd(','));
         }
 
         [HttpGet]
@@ -193,5 +193,8 @@ namespace Testing_iMeeting.Controllers
 
         //}
         #endregion
+
     }
+
+    
 }
